@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+celery = "*"
+pillow = "*"
+django-imagekit = "*"
+python-decouple = "*"
+django = "*"
+django-rest-framework = "*"
+drf-yasg = "*"
+channels = "*"
+django-service-objects = "*"
+django-fsm = "*"
+psycopg2-binary = "*"
+django-allauth = "*"
+djangorestframework-oauth = "*"
+django-oauth-plus = "*"
+oauth2 = "*"
+django-oauth2-provider = "*"
+django-rest-framework-social-oauth2 = "*"
+social-auth-app-django = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
