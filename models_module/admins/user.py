@@ -1,17 +1,14 @@
 from django.contrib import admin
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+from models_module.models.user.models import User
 
 
 class CustomUserAdmin(admin.ModelAdmin):
 
-    list_display = ('first_name', 'last_name', 'email', 'is_active',
-                    'is_staff', 'is_superuser', 'last_login')
-    list_display_links = ('email',)
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = User
 
-    fieldsets = (
-        (None, {
-            'fields': ('first_name', 'last_name', 'email', 'bio', 'password')
-        }),
-        ('Permissions', {
-            'fields': ('is_active', 'is_staff', 'is_superuser')
-        }),
-    )
+    list_display = ('email', 'first_name', 'last_name', 'is_active',
+                    'is_staff', 'is_superuser', 'last_login',)
+    list_display_links = ('email',)
