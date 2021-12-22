@@ -85,7 +85,6 @@ ASGI_APPLICATION = 'photo_backend_snp.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-#.env
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
@@ -100,7 +99,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-#.env
+# .env
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
