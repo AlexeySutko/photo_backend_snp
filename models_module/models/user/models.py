@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
 from imagekit.models import ProcessedImageField
@@ -8,9 +9,9 @@ from imagekit.processors import ResizeToFill
 # Custom user models for authentication and
 # saving additional information about user
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
-    bio = models.TextField(max_length=4000, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    email = models.EmailField(_("email address"), unique=True)
+    bio = models.TextField(_("bio"), max_length=4000, blank=True)
+    birth_date = models.DateField(_('date of birth'), null=True, blank=True)
     avatar = ProcessedImageField(upload_to='avatars',
                                  processors=[ResizeToFill(100, 100)],
                                  format='JPEG',
@@ -21,5 +22,5 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'users'
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = _("user")
+        verbose_name_plural = _("users")

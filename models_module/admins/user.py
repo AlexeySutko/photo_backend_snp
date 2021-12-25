@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .user_forms import CustomUserChangeForm, CustomUserCreationForm
 from models_module.models.user.models import User
 
 
