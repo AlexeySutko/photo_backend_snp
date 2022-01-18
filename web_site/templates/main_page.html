@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load bootstrap5 %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <div class="container">
+        <div class="row">
+            {% for user in user_list%}
+          <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <a href="#">{{ user.email }}</a>
+                    <a class="nav-link" href="#">{{ user.get_full_name }}</a>
+                </div>
+              <div class="card-body">
+                <img class="card-img" src="..." alt="image place">
+              </div>
+              <div class="card-footer">
+                  Likes/Comments
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

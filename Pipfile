@@ -22,6 +22,9 @@ oauth2 = "*"
 django-oauth2-provider = "*"
 django-rest-framework-social-oauth2 = "*"
 social-auth-app-django = "*"
+django-bootstrap-v5 = "*"
+jwt = "*"
+django-ajax = "*"
 
 [dev-packages]
 

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load i18n %}
+
+{% block content %}
+    <form action="." method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">{% translate 'Login with email' %}</button>
+            <a class="btn btn-primary" href="{% url 'web_site:registration' %}">{% translate 'Create an account' %}</a>
+        {% endbuttons %}
+    </form>
+{% endblock %}

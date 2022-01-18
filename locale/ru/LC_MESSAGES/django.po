@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-25 13:02+0300\n"
+"POT-Creation-Date: 2022-01-05 13:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,22 @@ msgstr ""
 #: models_module/apps.py:8
 msgid "models"
 msgstr "модели"
+
+#: models_module/forms/user_forms.py:26 models_module/forms/user_forms.py:42
+msgid "Password"
+msgstr "Пароль"
+
+#: models_module/forms/user_forms.py:27
+msgid "Repeat password"
+msgstr "Повторите пароль"
+
+#: models_module/forms/user_forms.py:36
+msgid "Passwords don't match."
+msgstr "Пароли не совпадают"
+
+#: models_module/forms/user_forms.py:41
+msgid "Email"
+msgstr "Адрес электронной почты"
 
 #: models_module/models/user/models.py:12
 msgid "email address"
@@ -44,10 +60,22 @@ msgstr "пользователь"
 msgid "users"
 msgstr "пользователи"
 
-#: photo_backend_snp/settings.py:127
+#: photo_backend_snp/settings.py:135
 msgid "Russian"
 msgstr "Русский"
 
-#: photo_backend_snp/settings.py:128
+#: photo_backend_snp/settings.py:136
 msgid "English"
 msgstr "Английский"
+
+#: templates/web_site/login.html:10
+msgid "Login with email"
+msgstr "Войти с помощью почты"
+
+#: templates/web_site/register.html:4
+msgid "Create an account"
+msgstr "Создайте аккаунт"
+
+#: templates/web_site/register.html:8
+msgid "Create account"
+msgstr "Создать аккаунт"
