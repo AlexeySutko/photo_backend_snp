@@ -13,15 +13,17 @@
                     {% csrf_token %}
                     {% bootstrap_form login_form %}
                     {% buttons %}
-                        <button type="submit" class="btn btn-primary">{% translate 'Login with email' %}</button>
-                        <a class="btn btn-primary" href="{% url 'web_site:register' %}">{% translate 'Create an account' %}</a>
+                        <button type="submit" class="btn btn-warning">{% translate 'Login with email' %}</button>
+                        <a class="btn btn-warning" href="{% url 'web_site:register' %}">{% translate 'Create an account' %}</a>
                     {% endbuttons %}
                   </form>
+                  {% buttons %}
+                  <a class="btn btn-warning" href="{% url 'social:begin' 'google-oauth2' %}">{% translate 'Login with Google'%}</a>
+                  <a class="btn btn-warning" href="{% url 'social:begin' 'github' %}">{% translate 'Login with GitHub'%}</a>
+                  {% endbuttons %}
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" value="Social login #1" > </button>
-                <button class="btn btn-primary" value="Social login #2" > </button>
             </div>
           </div>
         </div>

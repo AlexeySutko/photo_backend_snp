@@ -21,6 +21,8 @@ from .yasg import urlpatterns as yasg_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('oauth/', include('social_django.urls', namespace='social')),
+    # path('account/', include('allauth.urls')),
     path('', include('web_site.urls'))
 ]
 

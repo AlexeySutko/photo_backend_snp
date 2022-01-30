@@ -10,6 +10,6 @@ class CustomUserAdmin(admin.ModelAdmin):
     form = CustomUserChangeForm
     model = User
 
-    list_display = ('email', 'first_name', 'last_name', 'is_active',
+    list_display = ('avatar', 'email', 'first_name', 'last_name', 'is_active',
                     'is_staff', 'is_superuser', 'last_login',)
     list_display_links = ('email',)

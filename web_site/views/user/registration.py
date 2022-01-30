@@ -1,13 +1,9 @@
-from models_module.models.user.models import User
 from web_site.forms.user.registration import CustomUserRegistrationForm
 from web_site.services.user.create import CreateUser
 
-from django.utils.decorators import method_decorator
-from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
 
 """
     View used to register new users 

@@ -25,6 +25,9 @@ social-auth-app-django = "*"
 django-bootstrap-v5 = "*"
 jwt = "*"
 django-ajax = "*"
+install = "*"
+django-rest-auth = {extras = ["with_social"], version = "*"}
+django-oauth-toolkit = "*"
 
 [dev-packages]
 

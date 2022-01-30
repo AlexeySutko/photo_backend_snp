@@ -30,4 +30,3 @@ class UserLoginView(View):
                 return HttpResponseRedirect('/home/')
 
         return HttpResponseRedirect('/home/')
-

@@ -14,20 +14,26 @@
             <nav class="navbar navbar-light bg-warning">
               <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                  <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                    <div class="">{{ request.user.get_full_name }}</div>
+                  <img src="{{user.avatar}}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                    {{ request.user.get_full_name }}
                 </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                      <ul class="navbar-nav">
+                          <li><a class="dropdown-item" href="#">{% translate 'Personal cabinet' %}</a></li>
+                          <li><a class="dropdown-item" href="{% url 'web_site:logout' %}">{% translate 'Logout' %}</a></li>
+                      </ul>
+                  </div>
               </div>
-                <a class="btn btn-dark" href="{% url 'web_site:logout' %}">Logout</a>
             </nav>
             {% else %}
             {% include 'modal_login.html' %}
                 <nav class="navbar navbar-light bg-warning">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                        </a>
                     </div>
+                    <div class="navbar-brand d-inline-block">{% translate 'Welcome!' %}</div>
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#login">Login</button>
                 </nav>
             {% endif %}

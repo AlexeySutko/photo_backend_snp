@@ -7,7 +7,8 @@ from django.views.generic.list import ListView
     Placeholder for a main page showing photos
 """
 
-class MainView(ListView):
+
+class HomeView(ListView):
     template_name = 'main_page.html'
     context_object_name = 'user_list'
 
