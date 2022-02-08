@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load bootstrap5 %}
 {% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -12,24 +13,31 @@
         {% include 'navbar.html' %}
     </header>
 
-    <div class="container">
-        <div class="row">
-            {% for user in user_list%}
-          <div class="col-sm-6">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                    <a href="#">{{ user.email }}</a>
-                    <a class="nav-link" href="#">{{ user.get_full_name }}</a>
-                </div>
-              <div class="card-body">
-                <img class="card-img" src="..." alt="image place">
-              </div>
-              <div class="card-footer">
-                  Likes/Comments
-              </div>
+    <div class="album py-5">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
+                {% for photo in photo_list %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <img class="rounded" src="{{photo.owner.avatar.url}}" width="50" height="50">
+                                {{ photo.owner.get_full_name }}
+                            </div>
+                            <div>
+                                {{ photo.name }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid" src="{{ photo.image_size_big.url }}" alt="image place">
+                        </div>
+                        <div class="card-footer">
+                          Likes/Comments
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
             </div>
-          </div>
-            {% endfor %}
         </div>
     </div>
 </body>

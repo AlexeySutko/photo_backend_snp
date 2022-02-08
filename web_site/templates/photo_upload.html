@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap5 %}
+{% block content %}
+    <form action="{% url 'web_site:photo_upload' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {% bootstrap_form upload_form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-warning">{% translate 'Submit' %}</button>
+        {% endbuttons %}
+    </form>
+{% endblock %}

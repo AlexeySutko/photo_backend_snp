@@ -21,12 +21,18 @@ class UserLoginView(View):
     def post(self, request):
         form = self.form_class(self.request.POST)
         if form.is_valid():
-            user = authenticate(request,
-                                email=form.cleaned_data['email'],
-                                password=form.cleaned_data['password'])
+            try:
+                user = authenticate(request,
+                                    email=form.cleaned_data['email'],
+                                    password=form.cleaned_data['password'])
+            except Exception:
+                form.add_error(None, "Something went wrong")
 
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/home/')
+                return HttpResponseRedirect('/')
 
-        return HttpResponseRedirect('/home/')
+            else:
+                form.add_error(None, "Something went wrong")
+
+        return HttpResponseRedirect('/')

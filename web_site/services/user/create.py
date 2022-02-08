@@ -1,7 +1,7 @@
 from django import forms
 from service_objects.services import Service
-from models_module.models.user.models import User
 
+from models_module.models.user.models import User
 
 """
 Service layer for logic related to creating users

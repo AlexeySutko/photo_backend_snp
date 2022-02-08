@@ -27,7 +27,7 @@ class UserRegistrationView(CreateView):
                                     email=form.cleaned_data['email'],
                                     password=form.cleaned_data['password'])
                 login(self.request, user)
-                return HttpResponseRedirect('/home/')
+                return HttpResponseRedirect('/')
             except Exception:
                 form.add_error(None, "Something went wrong")
 

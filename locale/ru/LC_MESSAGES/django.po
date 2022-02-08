@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-05 13:37+0300\n"
+"POT-Creation-Date: 2022-01-31 12:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,58 +24,131 @@ msgstr ""
 msgid "models"
 msgstr "модели"
 
-#: models_module/forms/user_forms.py:26 models_module/forms/user_forms.py:42
-msgid "Password"
-msgstr "Пароль"
+#: models_module/models/photo/models.py:11
+msgid "Author"
+msgstr "Автор"
 
-#: models_module/forms/user_forms.py:27
-msgid "Repeat password"
-msgstr "Повторите пароль"
+#: models_module/models/photo/models.py:12
+msgid "Photo name"
+msgstr "Название"
 
-#: models_module/forms/user_forms.py:36
-msgid "Passwords don't match."
-msgstr "Пароли не совпадают"
+#: models_module/models/photo/models.py:14
+msgid "Photo description"
+msgstr "Описание"
 
-#: models_module/forms/user_forms.py:41
-msgid "Email"
-msgstr "Адрес электронной почты"
+#: models_module/models/photo/models.py:18
+msgid "photo"
+msgstr "фотография"
 
-#: models_module/models/user/models.py:12
+#: models_module/models/photo/models.py:19
+msgid "photos"
+msgstr "фотографии"
+
+#: models_module/models/user/models.py:13
 msgid "email address"
 msgstr "адрес электронной почты"
 
-#: models_module/models/user/models.py:13
+#: models_module/models/user/models.py:14
 msgid "bio"
 msgstr "о себе"
 
-#: models_module/models/user/models.py:14
+#: models_module/models/user/models.py:15
 msgid "date of birth"
 msgstr "Дата рождения"
 
-#: models_module/models/user/models.py:25
+#: models_module/models/user/models.py:19
+msgid "avatar"
+msgstr "аватар"
+
+#: models_module/models/user/models.py:27
 msgid "user"
 msgstr "пользователь"
 
-#: models_module/models/user/models.py:26
+#: models_module/models/user/models.py:28
 msgid "users"
 msgstr "пользователи"
 
-#: photo_backend_snp/settings.py:135
+#: photo_backend_snp/settings.py:158
 msgid "Russian"
 msgstr "Русский"
 
-#: photo_backend_snp/settings.py:136
+#: photo_backend_snp/settings.py:159
 msgid "English"
 msgstr "Английский"
 
-#: templates/web_site/login.html:10
+#: web_site/forms/user/change.py:8
+msgid "Avatar"
+msgstr "Аватар"
+
+#: web_site/forms/user/change.py:9
+msgid "First name"
+msgstr "Имя"
+
+#: web_site/forms/user/change.py:10
+
+msgid "Last name"
+msgstr "Фамилия"
+
+#: web_site/forms/user/change.py:11
+msgid "Bio"
+msgstr "О себе"
+
+#: web_site/forms/user/login.py:8
+msgid "Email"
+msgstr "Адрес электронной почты"
+
+#: web_site/forms/user/login.py:9 web_site/forms/user/registration.py:8
+msgid "Password"
+msgstr "Пароль"
+
+#: web_site/forms/user/registration.py:9
+msgid "Repeat password"
+msgstr "Повторите пароль"
+
+#: web_site/forms/user/registration.py:18
+msgid "Passwords don't match."
+msgstr "Пароли не совпадают"
+
+#: web_site/templates/change_user.html:8
+msgid "Submit"
+msgstr "Подтвердить"
+
+#: web_site/templates/login.html:10 web_site/templates/modal_login.html:16
+#: web_site/templates/modal_login.html:36
 msgid "Login with email"
 msgstr "Войти с помощью почты"
 
-#: templates/web_site/register.html:4
+#: web_site/templates/login.html:11 web_site/templates/modal_login.html:17
+#: web_site/templates/modal_login.html:37 web_site/templates/register.html:5
 msgid "Create an account"
 msgstr "Создайте аккаунт"
 
-#: templates/web_site/register.html:8
+#: web_site/templates/modal_login.html:9
+msgid "Login"
+msgstr "Войти"
+
+#: web_site/templates/modal_login.html:21
+msgid "Login with Google"
+msgstr "Войти с помощью Google"
+
+#: web_site/templates/modal_login.html:22
+#, fuzzy
+#| msgid "Login with email"
+msgid "Login with GitHub"
+msgstr "Войти с помощью GitHub"
+
+#: web_site/templates/navbar.html:25
+msgid "Personal cabinet"
+msgstr "Личный кабинет"
+
+#: web_site/templates/navbar.html:26
+msgid "Logout"
+msgstr "Выйти"
+
+#: web_site/templates/navbar.html:36
+msgid "Welcome!"
+msgstr "Добро пожаловать!"
+
+#: web_site/templates/register.html:10
 msgid "Create account"
 msgstr "Создать аккаунт"

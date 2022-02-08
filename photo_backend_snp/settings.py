@@ -28,9 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = config('AUTH_USER_MODEL')
+AUTH_USER_MODEL = config('USER_MODEL')
 
-LOGIN_URL = 'login'
+LOGIN_URL = '/'
 LOGOUT_URL = 'logout'
 
 LOGIN_REDIRECT_URL = '/'
@@ -42,6 +42,9 @@ CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'web_site', 'media')
+MEDIA_URL = '/media/'
 
 
 # Application definition
@@ -55,16 +58,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'rest_framework',
+    'rest_framework.authtoken',
     'celery',
     'imagekit',
     'decouple',
-    'drf_yasg',
+    'drf_yasg2',
     'channels',
     'django_fsm',
+    'fsm_admin2',
     'service_objects',
     'bootstrap5',
     'models_module',
     'web_site',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +106,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
                 'web_site.context_processors.access_login_form',
+                'web_site.context_processors.access_change_form',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -160,6 +167,7 @@ LOCALE_PATHS = [
 ]
 
 TIME_ZONE = 'Europe/Moscow'
+CELERY_TIMEZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -170,7 +178,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'web_site/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -199,3 +207,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
     'web_site.pipelines.pipeline.get_avatar',
 )
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}

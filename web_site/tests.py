@@ -1,6 +1,9 @@
+import requests
 from django.test import TestCase
 from web_site.services.user.create import CreateUser
+from web_site.services.photo.upload import CreatePhoto
 from models_module.models.user.models import User
+from models_module.models.photo.models import Photo
 
 
 # Test for user creation in user_service
@@ -18,3 +21,18 @@ class CreateUserTest(TestCase):
 
         user = User.objects.get()
         self.assertEqual(user.email, inputs['email'])
+
+    def test_create_photo(self):
+        inputs = {
+            'user': 'admin@email.com',
+            'user_id': '1',
+            'name': 'some',
+            'description': 'dsd',
+        }
+        files = {
+            'image': 'sssssss'
+        }
+        CreatePhoto.execute(inputs, files=files)
+
+        photo = Photo.objects.get()
+        self.assertEqual(photo.owner, inputs['user'])
