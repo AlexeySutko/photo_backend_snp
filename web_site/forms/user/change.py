@@ -9,7 +9,8 @@ class CustomUserChangeForm(forms.ModelForm):
     first_name = forms.CharField(label=_('First name'))
     last_name = forms.CharField(label=_('Last name'))
     bio = forms.CharField(widget=forms.Textarea, label=_('Bio'))
-    birth_date = forms.DateField(label=_('date of birth'))
+    birth_date = forms.DateField(label=_('date of birth'),
+                                 widget=forms.SelectDateWidget(years=[x for x in range(1940, 2011)]))
 
     class Meta:
         model = User

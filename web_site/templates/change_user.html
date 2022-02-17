@@ -10,3 +10,7 @@
         {% endbuttons %}
     </form>
 {% endblock %}
+
+{% if avatar %}
+<img src="{{ avatar.url }}" alt="img">
+{% endif %}

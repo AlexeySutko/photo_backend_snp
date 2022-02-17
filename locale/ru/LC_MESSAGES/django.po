@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-31 12:41+0300\n"
+"POT-Creation-Date: 2022-02-13 20:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,76 +20,155 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: models_module/admins/photo.py:21
+msgid "image"
+msgstr "фото"
+
+#: models_module/admins/photo_moderation.py:27
+#: models_module/models/photo/models.py:48
+msgid "Future image"
+msgstr "Будущее фото"
+
+#: models_module/admins/user.py:18 models_module/models/user/models.py:22
+msgid "avatar"
+msgstr "аватар"
+
 #: models_module/apps.py:8
 msgid "models"
 msgstr "модели"
 
-#: models_module/models/photo/models.py:11
+#: models_module/models/photo/models.py:17
+msgid "New"
+msgstr ""
+
+#: models_module/models/photo/models.py:17
+msgid "Pending"
+msgstr ""
+
+#: models_module/models/photo/models.py:17
+msgid "Approved"
+msgstr ""
+
+#: models_module/models/photo/models.py:17
+msgid "On deletion"
+msgstr ""
+
+#: models_module/models/photo/models.py:23
 msgid "Author"
 msgstr "Автор"
 
-#: models_module/models/photo/models.py:12
+#: models_module/models/photo/models.py:25
 msgid "Photo name"
 msgstr "Название"
 
-#: models_module/models/photo/models.py:14
+#: models_module/models/photo/models.py:42
 msgid "Photo description"
 msgstr "Описание"
 
-#: models_module/models/photo/models.py:18
+#: models_module/models/photo/models.py:46
+#, fuzzy
+#| msgid "First name"
+msgid "Future name"
+msgstr "Будущее имя"
+
+#: models_module/models/photo/models.py:47
+#, fuzzy
+#| msgid "Photo description"
+msgid "Future description"
+msgstr "Описание"
+
+#: models_module/models/photo/models.py:57
 msgid "photo"
 msgstr "фотография"
 
-#: models_module/models/photo/models.py:19
+#: models_module/models/photo/models.py:58
 msgid "photos"
 msgstr "фотографии"
 
-#: models_module/models/user/models.py:13
+#: models_module/models/photo/models.py:63
+msgid "Send on moderation"
+msgstr "Отправить на модерацию"
+
+#: models_module/models/photo/models.py:68
+#: models_module/models/photo/models.py:78
+msgid "Approve"
+msgstr "Одобрить"
+
+#: models_module/models/photo/models.py:73
+msgid "Cancel"
+msgstr "Отменить"
+
+#: models_module/models/photo/models.py:83
+msgid "Send on deletion"
+msgstr "Отправить на удаление"
+
+#: models_module/models/photo/models.py:88
+msgid "Cancel deletion"
+msgstr "Отменить удаление"
+
+#: models_module/models/photo/models.py:97
+msgid "Moderated photo"
+msgstr "Модерируемая фотография"
+
+#: models_module/models/photo/models.py:98
+msgid "Moderated photos"
+msgstr "Модерируемые фотографии"
+
+#: models_module/models/user/models.py:16
 msgid "email address"
 msgstr "адрес электронной почты"
 
-#: models_module/models/user/models.py:14
+#: models_module/models/user/models.py:17
 msgid "bio"
 msgstr "о себе"
 
-#: models_module/models/user/models.py:15
+#: models_module/models/user/models.py:18 web_site/forms/user/change.py:12
 msgid "date of birth"
 msgstr "Дата рождения"
 
-#: models_module/models/user/models.py:19
-msgid "avatar"
-msgstr "аватар"
-
-#: models_module/models/user/models.py:27
+#: models_module/models/user/models.py:32
 msgid "user"
 msgstr "пользователь"
 
-#: models_module/models/user/models.py:28
+#: models_module/models/user/models.py:33
 msgid "users"
 msgstr "пользователи"
 
-#: photo_backend_snp/settings.py:158
+#: photo_backend_snp/settings.py:164
 msgid "Russian"
 msgstr "Русский"
 
-#: photo_backend_snp/settings.py:159
+#: photo_backend_snp/settings.py:165
 msgid "English"
 msgstr "Английский"
 
-#: web_site/forms/user/change.py:8
+#: web_site/forms/photo/change.py:8
+msgid "Name"
+msgstr "Название"
+
+#: web_site/forms/photo/change.py:9
+msgid "Image"
+msgstr "Фото"
+
+#: web_site/forms/photo/change.py:11
+#, fuzzy
+#| msgid "Photo description"
+msgid "Description"
+msgstr "Описание"
+
+#: web_site/forms/user/change.py:8 web_site/templates/user_details.html:8
 msgid "Avatar"
 msgstr "Аватар"
 
-#: web_site/forms/user/change.py:9
+#: web_site/forms/user/change.py:9 web_site/templates/user_details.html:14
 msgid "First name"
 msgstr "Имя"
 
-#: web_site/forms/user/change.py:10
-
+#: web_site/forms/user/change.py:10 web_site/templates/user_details.html:19
 msgid "Last name"
 msgstr "Фамилия"
 
-#: web_site/forms/user/change.py:11
+#: web_site/forms/user/change.py:11 web_site/templates/user_details.html:25
 msgid "Bio"
 msgstr "О себе"
 
@@ -109,21 +188,21 @@ msgstr "Повторите пароль"
 msgid "Passwords don't match."
 msgstr "Пароли не совпадают"
 
-#: web_site/templates/change_user.html:8
+#: web_site/templates/change_photo.html:9 web_site/templates/change_user.html:9
+#: web_site/templates/photo_upload.html:9
 msgid "Submit"
 msgstr "Подтвердить"
 
 #: web_site/templates/login.html:10 web_site/templates/modal_login.html:16
-#: web_site/templates/modal_login.html:36
 msgid "Login with email"
 msgstr "Войти с помощью почты"
 
 #: web_site/templates/login.html:11 web_site/templates/modal_login.html:17
-#: web_site/templates/modal_login.html:37 web_site/templates/register.html:5
+#: web_site/templates/register.html:5
 msgid "Create an account"
 msgstr "Создайте аккаунт"
 
-#: web_site/templates/modal_login.html:9
+#: web_site/templates/modal_login.html:9 web_site/templates/navbar.html:38
 msgid "Login"
 msgstr "Войти"
 
@@ -138,17 +217,41 @@ msgid "Login with GitHub"
 msgstr "Войти с помощью GitHub"
 
 #: web_site/templates/navbar.html:25
+msgid "Main page"
+msgstr ""
+
+#: web_site/templates/navbar.html:26
 msgid "Personal cabinet"
 msgstr "Личный кабинет"
 
-#: web_site/templates/navbar.html:26
+#: web_site/templates/navbar.html:27
 msgid "Logout"
 msgstr "Выйти"
 
-#: web_site/templates/navbar.html:36
+#: web_site/templates/navbar.html:37
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
+
+#: web_site/templates/photo_details.html:31
+msgid "Change"
+msgstr "Изменить"
 
 #: web_site/templates/register.html:10
 msgid "Create account"
 msgstr "Создать аккаунт"
+
+#: web_site/templates/user_details.html:31
+msgid "API Key"
+msgstr "API Ключ"
+
+#: web_site/templates/user_details.html:38
+msgid "Change profile"
+msgstr "Изменить профиль"
+
+#: web_site/templates/user_details.html:39
+msgid "Generate new key"
+msgstr "Сгенерировать новый ключ"
+
+#: web_site/templates/user_details.html:40
+msgid "Upload photo"
+msgstr "Загрузить фото"

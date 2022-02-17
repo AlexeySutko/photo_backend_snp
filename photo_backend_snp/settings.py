@@ -43,9 +43,12 @@ SESSION_COOKIE_HTTPONLY = True
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
+IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'models_module.imagekit_strategy.strategy.CustomStrategy'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'web_site', 'media')
 MEDIA_URL = '/media/'
 
+FSM_ADMIN_FORCE_PERMIT = True
 
 # Application definition
 
@@ -70,7 +73,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'models_module',
     'web_site',
-    'django_cleanup.apps.CleanupConfig',
+    # 'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -167,7 +170,6 @@ LOCALE_PATHS = [
 ]
 
 TIME_ZONE = 'Europe/Moscow'
-CELERY_TIMEZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -210,6 +212,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_TIMEZONE = 'Europe/Moscow'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

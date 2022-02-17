@@ -12,4 +12,4 @@ class HomeView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Photo.objects.order_by('-publish_date')
+        return Photo.objects.filter(state='Approved')

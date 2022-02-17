@@ -10,7 +10,7 @@ Service layer for logic related to creating photos
 class CreatePhoto(Service):
     image = forms.ImageField()
     name = forms.CharField()
-    description = forms.CharField()
+    description = forms.CharField(required=False)
 
     def process(self):
         owner = self.initial['user']
@@ -20,4 +20,5 @@ class CreatePhoto(Service):
 
         self.photo = Photo.objects.create(owner=owner, image=image,
                                           name=name, description=description)
+
         return self.photo.save()

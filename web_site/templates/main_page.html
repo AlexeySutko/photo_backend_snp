@@ -9,19 +9,20 @@
     {% block title %}
     {% endblock %}
 <body>
-    <header>
-        {% include 'navbar.html' %}
-    </header>
+<header>
+    {% include 'navbar.html' %}
+</header>
 
-    <div class="album py-5">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
-                {% for photo in photo_list %}
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
+            {% for photo in photo_list %}
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <img class="rounded" src="{{photo.owner.avatar.url}}" width="50" height="50">
+                                <img class="rounded" src="{{ photo.owner.avatar.url }}" alt="none" width="50"
+                                     height="50">
                                 {{ photo.owner.get_full_name }}
                             </div>
                             <div>
@@ -29,16 +30,34 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <img class="img-fluid" src="{{ photo.image_size_big.url }}" alt="image place">
+                            <a href="{% url 'web_site:photo_details' photo.id %}">
+                                <img class="img-fluid" src="{{ photo.image_size_big.url }}" alt="image place">
+                            </a>
                         </div>
                         <div class="card-footer">
-                          Likes/Comments
-                      </div>
+                            Likes/Comments
+                        </div>
                     </div>
-                  </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; firts</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+            </span>
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
         </div>
     </div>
+</div>
 </body>
 </html>

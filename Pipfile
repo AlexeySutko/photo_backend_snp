@@ -33,6 +33,7 @@ djangorestframework-api-key = "*"
 django-fsm-admin2 = "*"
 drf-yasg2 = "*"
 django-cleanup = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

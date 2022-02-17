@@ -16,7 +16,8 @@ class UserChangeView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(instance=request.user)
-        return render(request, self.template_name, {'change_form': form})
+        avatar = request.FILES.get('avatar')
+        return render(request, self.template_name, {'change_form': form, 'avatar': avatar})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(self.request.POST, self.request.FILES, instance=request.user)
