@@ -34,6 +34,7 @@ django-fsm-admin2 = "*"
 drf-yasg2 = "*"
 django-cleanup = "*"
 django-celery-beat = "*"
+uvicorn = "*"
 
 [dev-packages]
 

@@ -2,6 +2,8 @@ from .forms.user.login import CustomUserLoginForm
 from .forms.user.registration import CustomUserRegistrationForm
 from .forms.user.change import CustomUserChangeForm
 
+from .services.like.is_liked import IsLiked
+
 
 def access_login_form(request):
     form = CustomUserLoginForm

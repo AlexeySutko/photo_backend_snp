@@ -1,4 +1,4 @@
-from django.contrib import admin
+from .custom_admin import CustomAdmin
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from fsm_admin2.admin import FSMTransitionMixin
@@ -12,7 +12,7 @@ def limit_by_state():
     return {'state': 'pending'}
 
 
-class PhotoModerationAdmin(FSMTransitionMixin, admin.ModelAdmin):
+class PhotoModerationAdmin(FSMTransitionMixin, CustomAdmin):
 
     add_form = PhotoModerationForm
     form = PhotoModerationForm
@@ -29,7 +29,7 @@ class PhotoModerationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     list_display = ('state', 'owner', 'image_display', 'future_name', 'change_date',)
     list_display_links = ('future_name', 'owner')
 
-    readonly_fields = ['name', 'image', 'description']
+    readonly_fields = ['name', 'description']
 
     def get_queryset(self, request):
         qs = super(PhotoModerationAdmin, self).get_queryset(request)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block content %}
     <!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -23,12 +24,21 @@
             </div>
         </div>
     </div> -->
+
     <div class="container">
         <div class="card mb-3">
             <img class="card-img-top" alt="image" src="{{ photo.image.url }}">
             <div class="card-body">
                 {% if request.user.id == photo.owner.id %}
-                    <a class="btn btn-warning" href="{% url 'web_site:photo_change' photo.id %}">{% translate 'Change' %}</a>
+                    <a class="btn btn-warning"
+                       href="{% url 'web_site:photo_change' photo.id %}">{% translate 'Change' %}</a>
+                    {% if photo.mark_as_deleted_at is None %}
+                        <a class="btn btn-warning"
+                           href="{% url 'web_site:photo_delete' photo.id %}">{% translate 'Delete' %}</a>
+                    {% else %}
+                        <a class="btn btn-warning"
+                           href="{% url 'web_site:photo_delete_cancel' photo.id %}">{% translate 'Cancel deletion' %}</a>
+                    {% endif %}
                 {% endif %}
                 <p class="card-title">{{ photo.name }}</p>
                 <div class="card-title">
@@ -36,6 +46,9 @@
                     {{ photo.owner.get_full_name }}
                 </div>
                 <div class="card-body">{{ photo.description }}</div>
+                {% if user.is_authenticated %}
+                    {% include 'likes.html' %}
+                {% endif %}
                 <ul class="list-group list-group-flush">
                     <!-- Place for comments -->
                 </ul>

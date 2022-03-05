@@ -13,12 +13,12 @@ class PhotoChangeView(LoginRequiredMixin, UpdateView):
     success_url = "/cabinet/"
 
     def get(self, request, *args, **kwargs):
-        instance = get_object_or_404(Photo, pk=kwargs['pk'])
+        instance = get_object_or_404(Photo, pk=self.kwargs['pk'])
         form = self.form_class(instance=instance)
         return render(request, self.template_name, {'change_form': form})
 
     def post(self, request, *args, **kwargs):
-        instance = get_object_or_404(Photo, pk=kwargs['pk'])
+        instance = get_object_or_404(Photo, pk=self.kwargs['pk'])
         form = self.form_class(self.request.POST, self.request.FILES, instance=instance)
         if form.is_valid():
             instance.photo_on_moderation()

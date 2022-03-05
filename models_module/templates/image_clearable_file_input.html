@@ -1,0 +1,50 @@
+<style>
+    .preview-image {
+        max-width: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+    }
+
+</style>
+<script type="application/javascript">
+        const showPreview = (event) => {
+            if ((/image\/[a-zA-Z]*/i).test(event.files[0].type)) {
+                let previewNode;
+                try {
+                    previewNode = event.parentNode.nextElementSibling.children[1]
+                } catch (TypeError) {
+                    previewNode = event.nextElementSibling.children[0]
+                };
+                previewNode.children[0].src = URL.createObjectURL(event.files[0]);
+                previewNode.removeAttribute('style');
+            }
+        }
+</script>
+{% if widget.is_initial %}
+    <p class="file-upload">
+    {{ widget.input_text }}:
+{% endif %}
+
+<input type="{{ widget.type }}" name="{{ widget.name }}" onChange="showPreview(this)" {% include "django/forms/widgets/attrs.html" %}>
+{% if not widget.required %}
+    <span class="clearable-file-input">
+        <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}" {% if widget.attrs.disabled %} disabled {% endif %}>
+        <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+    </span>
+{% endif %}
+<div>
+{% if widget.is_initial %}
+    <span class="current-image-block">
+        Current image preview:
+        <img class="current-image" src="{{ widget.value.url }}" style="max-width:200px;max-height:200px;margin-top:10px;">
+    </span>
+{% endif %}
+<span class="preview-image-block" style="display:none">
+    New image preview:
+    <img class="preview-image">
+</span>
+</div>
+
+{% if widget.is_initial %}
+    </p>
+{% endif %}

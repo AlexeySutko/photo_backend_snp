@@ -1,8 +1,7 @@
 from models_module.models.user.models import User
 from models_module.managers.photo.manager import CustomPhotoManager
-from models_module.state_conditions.photo_conditions import can_approve
-from models_module.service.photo_approve import PhotoApprove
-from models_module.service.photo_delete import PhotoDelete
+from web_site.services.photo.photo_approve import PhotoApprove
+from web_site.services.photo.photo_delete import PhotoDelete
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -47,9 +46,9 @@ class Photo(models.Model):
     future_description = models.TextField(_("Future description"), blank=True, null=True)
     future_image = models.ImageField(upload_to='photos', verbose_name=_('Future image'), null=True)
     change_date = models.DateTimeField(default=timezone.now)
-    mark_as_deleted_at = models.DateTimeField(null=True, blank=True)
+    mark_as_deleted_at = models.DateTimeField(null=True, blank=True, default=None)
 
-    state = FSMField(default=STATES[0], choices=STATES)
+    state = FSMField(default='New', choices=STATES)
 
     objects = CustomPhotoManager
 
@@ -76,11 +75,11 @@ class Photo(models.Model):
         PhotoApprove.photo_not_approved(instance=self)
 
     @transition(field=state, source='Pending', target='Approved',
-                custom={'short_description': _('Approve')}, conditions=[can_approve])
+                custom={'short_description': _('Approve')})
     def photo_approved(self):
         PhotoApprove.photo_update_on_approval(instance=self)
 
-    @transition(field=state, source='*', target='On deletion',
+    @transition(field=state, source='Approved', target='On deletion',
                 custom={'short_description': _('Send on deletion')})
     def photo_on_deletion(self):
         PhotoDelete.delete_photo(instance=self)
