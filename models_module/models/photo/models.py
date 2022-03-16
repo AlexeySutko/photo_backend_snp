@@ -52,6 +52,8 @@ class Photo(models.Model):
 
     objects = CustomPhotoManager
 
+    likes_count = models.IntegerField(default=0)
+
     class Meta:
         db_table = 'photos'
         verbose_name = _("photo")

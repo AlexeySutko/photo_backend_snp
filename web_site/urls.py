@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from web_site.views.user import registration, email_login, logout, change, change_key, personal_profile
-from web_site.views.main_pages import main_page, personal_cabinet
+from web_site.views.main_pages import main_page, personal_cabinet, main_page
 from web_site.views.photo import upload, details, photo_change, photo_delete, photo_delete_cancel, likes
 
 app_name = 'web_site'
