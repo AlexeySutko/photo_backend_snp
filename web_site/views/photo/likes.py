@@ -19,10 +19,6 @@ from django.shortcuts import render
 @method_decorator(csrf_exempt, name='dispatch')
 class LikeView(View):
 
-    def get(self, request, *args, **kwargs):
-        is_liked = IsLiked.is_liked(user=request, photo=kwargs['photo_id'])
-        render(request, template_name='likes.html', context={'check_if_liked': is_liked})
-
     def post(self, request, *args, **kwargs):
         result = Create.execute({
             'current_user': request.user,

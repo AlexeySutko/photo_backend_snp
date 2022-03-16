@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("[data-like-photo-id]").click(function (event) {
+    $("[data-like-photo-id]").off().on('click', function (event) {
         event.preventDefault();
         const url = $(this).attr('url');
         const photo_id = $(this).attr('value');
@@ -16,21 +16,20 @@ $(document).ready(function () {
             success: function (response) {
                 let like_counter_update = response + ' Liked'
                 console.log('success', like_counter_update)
-                $('[data-like-photo-id]').css('display', 'none')
-                $('[data-unlike-photo-id]').css('display', 'block')
+                $(`[data-like-photo-id="${photo_id}"]`).addClass("d-none")
+                $(`[data-unlike-photo-id="${photo_id}"]`).removeClass("d-none")
                 $(`.like-counter${photo_id}`).text(like_counter_update)
             },
             error: function (response) {
                 let error_obj = response.responseJSON['photo_id'][0]
                 console.log(error_obj)
-                $(`.like-counter${photo_id}`).text(error_obj)
+                window.alert(error_obj)
 
             }
-        })
-    })
+        });
+    });
 
-
-    $("[data-unlike-photo-id]").click(function (event) {
+    $("[data-unlike-photo-id]").off().on('click', function (event) {
         event.preventDefault();
         const url = $(this).attr('url');
         let photo_id = $(this).attr('value');
@@ -50,15 +49,16 @@ $(document).ready(function () {
             success: function (response) {
                 let like_counter_update = response + " Liked"
                 console.log('success', like_counter_update)
-                $('[data-unlike-photo-id]').css('display', 'none')
-                $('[data-like-photo-id]').css('display', 'block')
+                $(`[data-unlike-photo-id="${photo_id}"]`).addClass("d-none")
+                $(`[data-like-photo-id="${photo_id}"]`).removeClass("d-none")
                 $(`.like-counter${photo_id}`).text(like_counter_update)
-            },
+
+r;            },
             error: function (response) {
                 let error_obj = response.responseJSON['photo_id'][0]
                 console.log('error', error_obj)
-                $(`.like-counter${photo_id}`).text(error_obj)
+                window.alert(error_obj)
             }
-        })
+        });
     })
 })

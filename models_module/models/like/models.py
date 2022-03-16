@@ -8,7 +8,7 @@ from models_module.models.user.models import User
 class Like(models.Model):
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE,
                               related_name='likes',
-                              related_query_name='like')
+                              related_query_name='likes')
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='likes',
-                             related_query_name='like')
+                             related_query_name='likes')

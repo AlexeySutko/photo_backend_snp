@@ -1,22 +1,17 @@
-from models_module.models.photo.models import Photo
+from django.core.exceptions import ValidationError
+from service_objects.services import Service, forms
+from service_objects.fields import ModelField
+
 from models_module.models.user.models import User
 from models_module.models.like.models import Like
+from models_module.models.photo.models import Photo
 
 from django.shortcuts import get_object_or_404
 
-class IsLiked:
 
-    @staticmethod
-    def is_liked(user, photo):
-        photo = get_object_or_404(Photo, pk=photo.id)
-        user = get_object_or_404(User, pk=user.id)
+class IsLiked(Service):
+    photo_id = forms.IntegerField(min_value=1)
+    current_user = ModelField(User)
 
-        for like in photo.likes.all():
-            like.user.id
-        for like in user.likes.all():
-            like.photo_id
-
-        if Like.objects.filter(user=user, photo=photo):
-            return True
-        else:
-            return False
+    def process(self):
+        return Like.objects.filter(photo_id=outcome.result.object_list[0].id, user_id=request.user.pk).exists()

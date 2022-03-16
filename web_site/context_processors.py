@@ -1,7 +1,6 @@
 from .forms.user.login import CustomUserLoginForm
 from .forms.user.registration import CustomUserRegistrationForm
 from .forms.user.change import CustomUserChangeForm
-
 from .services.like.is_liked import IsLiked
 
 
@@ -18,3 +17,4 @@ def access_registration_form(request):
 def access_change_form(request):
     form = CustomUserChangeForm
     return {'change_form': form}
+

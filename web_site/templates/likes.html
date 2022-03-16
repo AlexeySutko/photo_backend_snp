@@ -4,14 +4,16 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-            <button id="like" value="{{ photo.id }}" class="btn btn-warning like-btn{{ photo.id }}"
-                    data-like-photo-id="{{ photo.id }}"
-                    url="{% url 'web_site:photo_like' photo.id %}">{% translate 'Like' %}</button>
-            <button id="unlike" value="{{ photo.id }}" class="btn btn-warning unlike-btn{{ photo.id }}"
+            <button id="unlike" value="{{ photo.id }}" class="{% if not photo.is_liked %}d-none{% endif %} btn btn-warning unlike-btn{{ photo.id }}"
                     data-unlike-photo-id="{{ photo.id }}"
                     url="{% url 'web_site:photo_like' photo.id %}">{% translate 'Unlike' %}</button>
+
+            <button id="like" value="{{ photo.id }}" class="{% if photo.is_liked %}d-none{% endif %} btn btn-warning like-btn{{ photo.id }}"
+                    data-like-photo-id="{{ photo.id }}"
+                    url="{% url 'web_site:photo_like' photo.id %}">{% translate 'Like' %}</button>
+
     {% endif %}
-    <div class="like-counter{{ photo.id }}">{{ photo.likes.count }} Liked</div>
+    <div class="like-counter{{ photo.id }}">{{ photo.likes_count }} Liked</div>
 {% endblock %}
 {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

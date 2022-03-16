@@ -1,21 +1,32 @@
+function asignControls(){
+    ajaxPagination();
+}
 
-function ajaxPagination(){
-    $('#pagination a.page-link').each((index, el) =>{
-        $(el).click((e) => {
-            e.preventDefault()
-            let page_url = $(el).attr('href')
-            console.log(page_url)
+function ajaxPagination() {
+    $('#pagination button.page-link').each((index, elem) => {
+        $(elem).on('click', (event) => {
+            debugger;
+            let paramStorage = localStorage;
+            let page_url = $(elem).attr('url');
+            paramStorage.setItem('page', page_url);
+            event.preventDefault();
+            console.log(paramStorage.getItem('page'));
 
             $.ajax({
-                url: page_url,
                 type: 'GET',
+                data: {
+                    'page' : paramStorage.getItem('page'),
+                    'sorted_by': paramStorage.getItem('sorted_by'),
+                    'search_string': paramStorage.getItem('search_string'),
+                },
                 success: (response) => {
-                    $('#photos').empty()
-                    $('#photos').append($(response).filter('#photos').html())
+                    $('#photos').empty();
+                    $('#photos').append($(response).filter('#photos').html());
 
-                    $('#pagination').empty()
-                    $('#pagination').append($(response).find('#pagination').html())
-                }
+                    $('#pagination').empty();
+                    $('#pagination').append($(response).find('#pagination').html());
+                    asignControls()
+                },
             })
         })
     })

@@ -7,6 +7,8 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     {% block title %}
     {% endblock %}
 <body>
@@ -45,27 +47,31 @@
             {% endfor %}
         </div>
 
-    <!--Pagination-->
+        <!--Pagination-->
         <div class="pagination" id="pagination">
             <span class="step-links">
                 {% if photo_list.has_previous %}
-                    <a class="page-link" href="?page=1">&laquo; first</a>
-                    <a class="page-link" href="?page={{ photo_list.previous_page_number }}">previous</a>
+                    <button class="page-link" url="1" data-page-number="1">&laquo; first</button>
+                    <button class="page-link" url="{{ photo_list.previous_page_number }}"
+                            data-page-number="{{ photo_list.previous_page_number }}">previous</button>
                 {% endif %}
             </span>
             <span class="current">
                 Page {{ photo_list.number }} of {{ photo_list.paginator.num_pages }}.
 
                 {% if photo_list.has_next %}
-                    <a class="page-link" href="?page={{ photo_list.next_page_number }}">next</a>
-                    <a class="page-link" href="?page={{ photo_list.paginator.num_pages }}">last &raquo;</a>
+                    <button class="page-link" url="{{ photo_list.next_page_number }}"
+                            data-page-number="{{ photo_list.next_page_number }}">next</button>
+                    <button class="page-link" url="{{ photo_list.paginator.num_pages }}"
+                            data-page-number="{{ photo_list.paginator.num_pages }}">last &raquo;</button>
                 {% endif %}
             </span>
         </div>
     </div>
 </div>
 <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/async_pagination.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/async_pagination.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/search_and_sort.js' %}"></script>
 </body>
 </html>
