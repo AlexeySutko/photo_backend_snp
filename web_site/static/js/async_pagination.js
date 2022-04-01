@@ -1,41 +1,148 @@
-function asignControls(){
+function asignControls() {
     ajaxPagination();
-}
-
-function ajaxPagination() {
-    $('#pagination button.page-link').each((index, elem) => {
-        $(elem).on('click', (event) => {
-            debugger;
-            let paramStorage = localStorage;
-            let page_url = $(elem).attr('url');
-            paramStorage.setItem('page', page_url);
-            event.preventDefault();
-            console.log(paramStorage.getItem('page'));
-
-            $.ajax({
-                type: 'GET',
-                data: {
-                    'page' : paramStorage.getItem('page'),
-                    'sorted_by': paramStorage.getItem('sorted_by'),
-                    'search_string': paramStorage.getItem('search_string'),
-                },
-                success: (response) => {
-                    $('#photos').empty();
-                    $('#photos').append($(response).filter('#photos').html());
-
-                    $('#pagination').empty();
-                    $('#pagination').append($(response).find('#pagination').html());
-                    asignControls()
-                },
-            })
-        })
-    })
 }
 
 $(document).ready(function () {
     ajaxPagination()
-})
+});
+
+
+function ajaxPagination() {
+    let paramStorage = localStorage;
+    let firstPageBtn = $('#pagination .first-page-btn');
+    let prevPageBtn = $('#pagination .previous-page-btn');
+    let nextPageBtn = $('#pagination .next-page-btn');
+    let lastPageBtn = $('#pagination .last-page-btn');
+    let currentPage = paramStorage.getItem('page');
+
+    firstPageBtn.on('click', (event) => {
+        event.preventDefault();
+        let newPage = firstPageBtn.attr('value');
+        paramStorage.setItem('page', newPage);
+        console.log(paramStorage.getItem('page'));
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                'page': paramStorage.getItem('page'),
+                'sorted_by': paramStorage.getItem('sorted_by'),
+                'search_string': paramStorage.getItem('search_string'),
+            }, success: (response) => {
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
+
+                $('.current .current-page').empty().text(newPage)
+
+                prevPageBtn.attr('value', null)
+                nextPageBtn.attr('value', String(Number(newPage) + 1))
+
+                lastPageBtn.removeClass("d-none")
+                nextPageBtn.removeClass("d-none")
+                firstPageBtn.addClass("d-none")
+                prevPageBtn.addClass("d-none")
+
+            },
+        })
+    })
+    prevPageBtn.on('click', (event) => {
+        event.preventDefault();
+        let newPage = prevPageBtn.attr('value');
+        paramStorage.setItem('page', newPage);
+        console.log(paramStorage.getItem('page'));
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                'page': paramStorage.getItem('page'),
+                'sorted_by': paramStorage.getItem('sorted_by'),
+                'search_string': paramStorage.getItem('search_string'),
+            }, success: (response) => {
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
+
+                $('.current .current-page').text(newPage)
+
+                prevPageBtn.attr('value', String(Number(newPage) - 1))
+                nextPageBtn.attr('value', String(Number(newPage) + 1))
+
+                lastPageBtn.removeClass("d-none")
+                nextPageBtn.removeClass("d-none")
+
+                if (Number(paramStorage.getItem('page')) === Number(firstPageBtn.attr('value'))) {
+                    prevPageBtn.attr('value', null)
+                    nextPageBtn.attr('value', String(Number(newPage) + 1))
+                    firstPageBtn.addClass("d-none")
+                    prevPageBtn.addClass("d-none")
+                }
+            },
+        })
+    })
+    nextPageBtn.on('click', (event) => {
+        event.preventDefault();
+        let newPage = nextPageBtn.attr('value');
+        paramStorage.setItem('page', newPage);
+        console.log(paramStorage.getItem('page'));
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                'page': paramStorage.getItem('page'),
+                'sorted_by': paramStorage.getItem('sorted_by'),
+                'search_string': paramStorage.getItem('search_string'),
+            }, success: (response) => {
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
+
+                $('.current .current-page').text(newPage)
+
+                prevPageBtn.attr('value', String(Number(newPage) - 1))
+                nextPageBtn.attr('value', String(Number(newPage) + 1))
+
+                firstPageBtn.removeClass("d-none")
+                prevPageBtn.removeClass("d-none")
+
+                if (Number(paramStorage.getItem('page')) === Number(lastPageBtn.attr('value'))) {
+                    lastPageBtn.attr('value', null)
+                    prevPageBtn.attr('value', String(Number(newPage) - 1))
+                    lastPageBtn.addClass("d-none")
+                    nextPageBtn.addClass("d-none")
+                }
+            },
+        })
+    })
+    lastPageBtn.on('click', (event) => {
+        event.preventDefault();
+        let newPage = lastPageBtn.attr('value');
+        paramStorage.setItem('page', newPage);
+        console.log(paramStorage.getItem('page'));
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                'page': paramStorage.getItem('page'),
+                'sorted_by': paramStorage.getItem('sorted_by'),
+                'search_string': paramStorage.getItem('search_string'),
+            }, success: (response) => {
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
+
+                $('.current .current-page').text(newPage)
+
+                nextPageBtn.attr('value', null)
+                prevPageBtn.attr('value', String(Number(newPage) - 1))
+
+                firstPageBtn.removeClass("d-none")
+                prevPageBtn.removeClass("d-none")
+                nextPageBtn.addClass("d-none")
+                lastPageBtn.addClass("d-none")
+
+                firstPageBtn.removeClass("d-none")
+                prevPageBtn.removeClass("d-none")
+            },
+        })
+    })
+}
 
 $(document).ajaxStop(function () {
     ajaxPagination()
-})
+});

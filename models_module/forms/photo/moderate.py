@@ -6,4 +6,4 @@ class PhotoModerationForm(ModelForm):
 
     class Meta:
         model = Photo
-        fields = ('future_name', 'future_image', 'future_description', 'change_date', 'owner')
+        fields = ('future_name', 'future_image', 'future_description')

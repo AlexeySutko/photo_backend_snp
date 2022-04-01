@@ -6,4 +6,4 @@ class PhotoCreationForm(ModelForm):
 
     class Meta:
         model = Photo
-        fields = ('name', 'image', 'description', 'publish_date', 'state', 'owner')
+        fields = ('name', 'image', 'description', 'state', 'owner')

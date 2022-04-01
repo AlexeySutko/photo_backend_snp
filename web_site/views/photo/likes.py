@@ -20,21 +20,21 @@ from django.shortcuts import render
 class LikeView(View):
 
     def post(self, request, *args, **kwargs):
-        result = Create.execute({
+        outcome = Create.execute({
             'current_user': request.user,
             'photo_id': json.loads(request.body)['photo_id']
         })
-        if result.is_valid():
-            return JsonResponse(result.number_of_likes, status=200, safe=False)
+        if outcome.is_valid():
+            return JsonResponse(outcome.number_of_likes, status=200, safe=False)
         else:
-            return JsonResponse(result.errors, status=400, safe=False)
+            return JsonResponse(outcome.errors, status=400, safe=False)
 
     def delete(self, request, *args, **kwargs):
-        result = Remove.execute({
+        outcome = Remove.execute({
             'current_user': request.user,
             'photo_id': json.loads(request.body)['photo_id']
         })
-        if result.is_valid():
-            return JsonResponse(result.number_of_likes, status=200, safe=False)
+        if outcome.is_valid():
+            return JsonResponse(outcome.number_of_likes, status=200, safe=False)
         else:
-            return JsonResponse(result.errors, status=400, safe=False)
+            return JsonResponse(outcome.errors, status=400, safe=False)

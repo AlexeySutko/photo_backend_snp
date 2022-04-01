@@ -1,0 +1,24 @@
+{% load i18n %}
+{% block content %}
+
+    <div class="pagination" id="pagination">
+            <span class="step-links">
+                    <button class="first-page-btn btn btn-warning {% if not object_list.has_previous %}d-none{% endif %}"
+                            value="1"
+                            style="color: black;text-decoration: none;background: #ffc107;">&laquo; first</button>
+                    <button class="previous-page-btn btn btn-warning {% if not object_list.has_previous %}d-none{% endif %}"
+                            value="{{ previous_page_number }}"
+                            style="color: black;text-decoration: none;background: #ffc107;">previous</button>
+            </span>
+        <span class="current">
+            <span class="current-page" value="">{{ object_list.number }}</span> of {{ object_list.paginator.num_pages }}
+
+                <button class="next-page-btn btn btn-warning {% if not object_list.has_next %}d-none{% endif %}"
+                        value="{{ object_list.next_page_number }}"
+                        style="color: black;text-decoration: none;background: #ffc107;">next</button>
+                <button class="last-page-btn btn btn-warning {% if not object_list.has_next %}d-none{% endif %}"
+                        value="{{ object_list.paginator.num_pages }}"
+                        style="color: black;text-decoration: none;background: #ffc107;">last &raquo;</button>
+            </span>
+    </div>
+{% endblock %}

@@ -1,5 +1,4 @@
 from photo_backend_snp import settings
-
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from service_objects.services import Service, forms
@@ -9,7 +8,7 @@ from models_module.models.like.models import Like
 from models_module.models.photo.models import Photo
 
 
-class MainPageCollection(Service):
+class PersonalCabinetCollection(Service):
     user_id = forms.IntegerField(required=False)
     search_string = forms.CharField(required=False)
     sorted_by = forms.CharField(required=False)
@@ -21,7 +20,7 @@ class MainPageCollection(Service):
 
     @property
     def _collection(self):
-        page = Paginator(self._photos, settings.MAIN_PAGE_COLLECTION_OBJECT_COUNT)\
+        page = Paginator(self._photos, settings.PERSONAL_CABINET_COLLECTION_OBJECT_COUNT)\
             .page(self.cleaned_data.get('page') or 1)
         for photo in page.object_list:
             setattr(photo, "is_liked",
@@ -30,7 +29,7 @@ class MainPageCollection(Service):
 
     @property
     def _photos(self):
-        photos = Photo.objects.filter(state='Approved')
+        photos = Photo.objects.filter(owner_id=self.cleaned_data.get("user_id"))
         if self.cleaned_data.get('search_string'):
             photos = photos.filter(name__icontains=self.cleaned_data.get('search_string'))
             photos = photos.filter(description__icontains=self.cleaned_data.get('search_string'))

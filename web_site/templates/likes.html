@@ -1,21 +1,16 @@
-{% extends 'base.html' %}
-{% load i18n %}
-{% load static %}
-
 {% block content %}
-    {% if request.user.is_authenticated %}
-            <button id="unlike" value="{{ photo.id }}" class="{% if not photo.is_liked %}d-none{% endif %} btn btn-warning unlike-btn{{ photo.id }}"
-                    data-unlike-photo-id="{{ photo.id }}"
-                    url="{% url 'web_site:photo_like' photo.id %}">{% translate 'Unlike' %}</button>
+    <div style="display: flex">
+        {% if request.user.is_authenticated %}
+            <span class="{% if not photo.is_liked %}d-none{% endif %} like-btn{{ photo.id }}" id="unlike"
+                    value="{{ photo.id }}"
+                    data-unlike-photo-id="{{ photo.id }}" style="background: transparent; border: none;"
+                    url="{% url 'web_site:photo_like' photo.id %}"><i class="fa-solid fa-heart"></i></span>
+            <span class="{% if photo.is_liked %}d-none{% endif %} unlike-btn{{ photo.id }}" id="like"
+                    value="{{ photo.id }}"
+                    data-like-photo-id="{{ photo.id }}" style="background: transparent; border: none;"
+                    url="{% url 'web_site:photo_like' photo.id %}"><i class="fa-regular fa-heart"></i></span>
 
-            <button id="like" value="{{ photo.id }}" class="{% if photo.is_liked %}d-none{% endif %} btn btn-warning like-btn{{ photo.id }}"
-                    data-like-photo-id="{{ photo.id }}"
-                    url="{% url 'web_site:photo_like' photo.id %}">{% translate 'Like' %}</button>
-
-    {% endif %}
-    <div class="like-counter{{ photo.id }}">{{ photo.likes_count }} Liked</div>
-{% endblock %}
-{% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/ajax_likes.js' %}"></script>
+        {% endif %}
+        <div class="like-counter{{ photo.id }}">{{ photo.likes_count }}</div>
+    </div>
 {% endblock %}

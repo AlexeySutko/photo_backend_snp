@@ -35,6 +35,7 @@ drf-yasg2 = "*"
 django-cleanup = "*"
 django-celery-beat = "*"
 uvicorn = "*"
+fontawesomefree = "*"
 
 [dev-packages]
 

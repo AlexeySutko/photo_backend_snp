@@ -2,7 +2,7 @@ $(document).ready(function () {
     localStorage.clear();
     ajaxSort();
     ajaxSearch();
-})
+});
 
 function ajaxSort() {
     $("[data-sort-by]").click(function (event) {
@@ -16,19 +16,15 @@ function ajaxSort() {
 
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8000/test',
+            url: window.location.href,
             data: {
                 'page': paramStorage.getItem('page'),
                 'sorted_by': paramStorage.getItem('sorted_by'),
                 'search_string': paramStorage.getItem('search_string')
             },
             success: function (response) {
-                $('#photos').empty();
-                $('#photos').append($(response).filter('#photos').html());
-
-                $('#pagination').empty();
-                $('#pagination').append($(response).find('#pagination').html());
-                asignControls();
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
             },
             error: function (response) {
                 console.log('failed')
@@ -53,22 +49,20 @@ function ajaxSearch() {
 
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8000/test',
+            url: '/',
             data: {
                 'page': paramStorage.getItem('page'),
                 'sorted_by': paramStorage.getItem('sorted_by'),
                 'search_string': paramStorage.getItem('search_string')
             },
             success: function (response) {
-                $('#photos').empty();
-                $('#photos').append($(response).filter('#photos').html());
-
-                $('#pagination').empty();
-                $('#pagination').append($(response).find('#pagination').html());
-                asignControls();
+                $('#photos .photos-collection').empty();
+                $('#photos .photos-collection').append($(response).html());
             },
             error: function (response) {
-                console.log('failed', response)
+                const error_obj = response?.responseJSON['search_string'][0]
+                console.log(response)
+                window.alert(error_obj)
             },
         });
     });

@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 from models_module.models.photo.models import Photo
@@ -9,6 +11,7 @@ class Like(models.Model):
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE,
                               related_name='likes',
                               related_query_name='likes')
+
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='likes',
                              related_query_name='likes')

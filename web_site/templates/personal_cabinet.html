@@ -1,71 +1,24 @@
+{% extends 'base.html' %}
 {% load i18n %}
-{% load bootstrap5 %}
-{% get_current_language as LANGUAGE_CODE %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<header>
-    {% include 'navbar.html' %}
-</header>
+{% load static %}
+
+{% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar"
-             style="max-width: 30%; height: 100%;">
+        <div class="col-md-2 d-auto ml-sm-auto bg-light sidebar">
             <ul class="nav nav-pills flex-column mb-auto">
                 {% include 'user_details.html' %}
             </ul>
         </div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
-                    {% for photo in photo_list.all %}
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div>
-                                        <img class="rounded" src="{{ photo.owner.avatar.url }}" width="50" height="50">
-                                        {{ photo.owner.get_full_name }}
-                                    </div>
-                                    <div>
-                                        {{ photo.name }}
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <a href="{% url 'web_site:photo_details' photo.id %}">
-                                        <img class="img-fluid" src="{{ photo.image_size_big.url }}" alt="image place">
-                                    </a>
-                                </div>
-                                <div class="card-footer">
-                                    <div>State: {{ photo.state }}</div>
-                                    Likes/Comments
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </main>
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; firts</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-            </span>
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+        <div class="album col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="photos">
+            {% include 'object_collection.html' %}
+            {% include 'pagination.html' %}
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}
+<!-- SCRIPTS -->
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/async_pagination.js' %}"></script>
+{% endblock %}

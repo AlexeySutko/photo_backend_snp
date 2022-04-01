@@ -1,0 +1,72 @@
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <div class="photos-collection">
+        <div>
+            <form class="d-flex" id="search-bar" name="search">
+                <input name="search_string" class="form-control mr-sm-2" type="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-warning my-2 my-sm-0">Search</button>
+            </form>
+            <li class="nav-item dropdown">
+                <button class="btn btn-warning dropdown-toggle" id="navbarDropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% translate "Sort by:" %}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="publish_date">
+                        {% translate "Publish date (Asc)" %}</a>
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="-publish_date">
+                        {% translate "Publish date (Desc)" %}</a>
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="likes_count">
+                        {% translate "Likes (Asc)" %}</a>
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="-likes_count">
+                        {% translate "Likes (Desc)" %}</a>
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="comments">
+                        {% translate "Comments (Asc)" %}</a>
+                    <a class="dropdown-item" id="sort-btn"
+                       data-sort-by="-comments">
+                        {% translate "Comments (Desc)" %}</a>
+                </div>
+            </li>
+        </div>
+        <div class="container">
+            {% if object_list %}
+                <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
+                    {% for photo in object_list %}
+                        <div class="col">
+                            <div class="card">
+                                <a href="{% url 'web_site:photo_details' photo.id %}">
+                                    <img class="card-img-top" src="{{ photo.image_size_big.url }}" alt="Card image cap">
+                                </a>
+                                <div class="card-body" style="background: #f7f7f7;">
+                                    <div>
+                                        Author: {{ photo.owner.get_full_name }}
+                                        <div>
+                                            Title: {{ photo.name }}
+                                        </div>
+                                    </div>
+                                    {% include 'likes.html' %}
+                                    <i class="fa-solid fa-comment-dots"></i>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Nothing was found</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/search_and_sort.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_likes.js' %}"></script>
+{% endblock %}

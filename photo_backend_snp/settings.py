@@ -16,7 +16,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -25,7 +24,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 
 ALLOWED_HOSTS = []
 
@@ -74,6 +72,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'models_module',
     'web_site',
+    'fontawesomefree',
     # 'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -121,7 +120,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'photo_backend_snp.wsgi.application'
 ASGI_APPLICATION = 'photo_backend_snp.asgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
@@ -152,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -248,3 +245,6 @@ LOGGING = {
         },
     }
 }
+
+MAIN_PAGE_COLLECTION_OBJECT_COUNT = config('MAIN_PAGE_COLLECTION_OBJECT_COUNT', cast=int, default=6)
+PERSONAL_CABINET_COLLECTION_OBJECT_COUNT = config('PERSONAL_CABINET_COLLECTION_OBJECT_COUNT', cast=int, default=3)

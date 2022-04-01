@@ -1,41 +1,42 @@
-{% extends 'base.html' %}
-{% load i18n %}
 {% load bootstrap5 %}
+{% load i18n %}
 
 {% block content %}
-<div class="container">
     <div class="container">
-        <label class="form-lable">{% translate 'Avatar' %}</label>
         <div class="container">
-            <img class="rounded-circle" src="{{user.avatar.url}}" style="max-width: 10em;">
+            <label class="form-lable">{% translate 'Avatar' %}</label>
+            <div class="container">
+                <img class="rounded-circle" src="{{ user.avatar.url }}" style="max-width: 10em;">
+            </div>
+        </div>
+        <div class="container">
+            <label class="form-lable">{% translate 'First name' %}</label>
+            <div class="bg-light border">
+                {{ user.first_name }}
+            </div>
+        </div>
+        <label class="form-lable">{% translate 'Last name' %}</label>
+        <div class="container">
+            <div class="bg-light border" aria-label="% translate 'Last name' %}">
+                {{ user.last_name }}
+            </div>
+        </div>
+        <label class="form-lable">{% translate 'Bio' %}</label>
+        <div class="container">
+            <div class="bg-light border">
+                {{ user.bio }}
+            </div>
+        </div>
+        <label class="form-lable">{% translate 'API Key' %}</label>
+        <div class="container">
+            <div class="bg-light border text-break">
+                {{ user.auth_token }}
+            </div>
         </div>
     </div>
-    <div class="container">
-        <label class="form-lable">{% translate 'First name' %}</label>
-        <div class="bg-light border">
-            {{ user.first_name }}
-        </div>
+    <div style="display: flex;flex-flow: column;padding: 10px;">
+        <a class="btn btn-warning" href="{% url 'web_site:change' %}">{% translate 'Change profile' %}</a>
+        <a class="btn btn-warning" href="{% url 'web_site:api_token' %}">{% translate 'Generate new key' %}</a>
+        <a class="btn btn-warning" href="{% url 'web_site:photo_upload' %}">{% translate 'Upload photo' %}</a>
     </div>
-    <label class="form-lable">{% translate 'Last name' %}</label>
-    <div class="container">
-        <div class="bg-light border" aria-label="% translate 'Last name' %}">
-            {{ user.last_name }}
-        </div>
-    </div>
-    <label class="form-lable">{% translate 'Bio' %}</label>
-    <div class="container">
-        <div class="bg-light border">
-            {{ user.bio }}
-        </div>
-    </div>
-    <label class="form-lable">{% translate 'API Key' %}</label>
-    <div class="container">
-        <div class="bg-light border text-break">
-            {{ user.auth_token }}
-        </div>
-    </div>
-</div>
-<a class="btn btn-warning" href="{% url 'web_site:change'%}">{% translate 'Change profile' %}</a>
-<a class="btn btn-warning" href="{% url 'web_site:api_token' %}">{% translate 'Generate new key' %}</a>
-<a class="btn btn-warning" href="{% url 'web_site:photo_upload' %}">{% translate 'Upload photo' %}</a>
 {% endblock %}

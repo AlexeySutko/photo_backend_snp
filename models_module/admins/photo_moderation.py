@@ -29,7 +29,7 @@ class PhotoModerationAdmin(FSMTransitionMixin, CustomAdmin):
     list_display = ('state', 'owner', 'image_display', 'future_name', 'change_date',)
     list_display_links = ('future_name', 'owner')
 
-    readonly_fields = ['name', 'description']
+    readonly_fields = ['name', 'description', 'publish_date', 'change_date', 'owner']
 
     def get_queryset(self, request):
         qs = super(PhotoModerationAdmin, self).get_queryset(request)

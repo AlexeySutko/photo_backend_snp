@@ -1,11 +1,22 @@
-from django.views.generic.list import ListView
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from models_module.models import Photo
+from web_site.services.photo.personal_cabinet_collection import PersonalCabinetCollection
 
-class CabinetView(LoginRequiredMixin, ListView):
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CabinetView(LoginRequiredMixin, View):
+    model = Photo
     template_name = 'personal_cabinet.html'
-    context_object_name = 'photo_list'
-    paginate_by = 3
+    context_object_name = 'object_list'
 
-    def get_queryset(self):
-        return self.request.user.photos.all()
+    def get(self, request, *args, **kwargs):
+        outcome = PersonalCabinetCollection.execute(dict(request.GET.items()) | {"user_id": request.user.pk})
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return render(request, template_name='object_collection.html', context={'object_list': outcome.result})
+        else:
+            return render(request, template_name=self.template_name, context={'object_list': outcome.result})

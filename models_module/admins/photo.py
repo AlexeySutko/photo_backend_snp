@@ -23,7 +23,7 @@ class PhotoAdmin(FSMTransitionMixin, CustomAdmin):
     image_display = AdminThumbnail(image_field='thumbnail',)
     image_display.short_description = _('image')
 
-    readonly_fields = []
+    readonly_fields = ['publish_date', 'change_date', 'owner']
 
     list_display = ('state', 'owner', 'image_display', 'name', 'publish_date', 'mark_as_deleted_at')
     list_display_links = ('name', 'owner')

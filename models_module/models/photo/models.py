@@ -1,7 +1,8 @@
+import datetime
+
 from models_module.models.user.models import User
 from models_module.managers.photo.manager import CustomPhotoManager
 from web_site.services.photo.photo_approve import PhotoApprove
-from web_site.services.photo.photo_delete import PhotoDelete
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -39,13 +40,14 @@ class Photo(models.Model):
                                format='JPEG',
                                options={'quality': 60})
     description = models.TextField(_("Photo description"), blank=True, null=True)
-    publish_date = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    publish_date = models.DateTimeField(auto_now=True)
 
     # Moderation fields
     future_name = models.CharField(max_length=50, verbose_name=_("Future name"), null=True)
     future_description = models.TextField(_("Future description"), blank=True, null=True)
     future_image = models.ImageField(upload_to='photos', verbose_name=_('Future image'), null=True)
-    change_date = models.DateTimeField(default=timezone.now)
+    change_date = models.DateTimeField(auto_now=True)
     mark_as_deleted_at = models.DateTimeField(null=True, blank=True, default=None)
 
     state = FSMField(default='New', choices=STATES)
@@ -69,7 +71,7 @@ class Photo(models.Model):
     @transition(field=state, source='New', target='Approved',
                 custom={'short_description': _('Approve')})
     def photo_approve_new(self):
-        pass
+        self.publish_date = timezone.now()
 
     @transition(field=state, source='Pending', target='Approved',
                 custom={'short_description': _('Cancel')})
@@ -79,17 +81,17 @@ class Photo(models.Model):
     @transition(field=state, source='Pending', target='Approved',
                 custom={'short_description': _('Approve')})
     def photo_approved(self):
-        PhotoApprove.photo_update_on_approval(instance=self)
+        PhotoApprove.photo_approved(instance=self)
 
     @transition(field=state, source='Approved', target='On deletion',
                 custom={'short_description': _('Send on deletion')})
     def photo_on_deletion(self):
-        PhotoDelete.delete_photo(instance=self)
+        self.mark_as_deleted_at = timezone.now() + datetime.timedelta(seconds=120)
 
     @transition(field=state, source='On deletion', target='Approved',
                 custom={'short_description': _('Cancel deletion')})
     def photo_cancel_deletion(self):
-        PhotoDelete.cancel_deletion(instance=self)
+        self.mark_as_deleted_at = None
 
 
 # Proxy model to show in admin photos

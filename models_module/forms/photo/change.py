@@ -6,4 +6,4 @@ class PhotoChangeForm(ModelForm):
 
     class Meta:
         model = Photo
-        fields = ('name', 'image', 'description', 'publish_date', 'owner', 'mark_as_deleted_at')
+        fields = ('name', 'image', 'description', 'mark_as_deleted_at')

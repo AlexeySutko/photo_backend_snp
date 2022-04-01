@@ -14,7 +14,7 @@ $(document).ready(function () {
                 'photo_id': photo_id
             }),
             success: function (response) {
-                let like_counter_update = response + ' Liked'
+                let like_counter_update = response
                 console.log('success', like_counter_update)
                 $(`[data-like-photo-id="${photo_id}"]`).addClass("d-none")
                 $(`[data-unlike-photo-id="${photo_id}"]`).removeClass("d-none")
@@ -47,18 +47,18 @@ $(document).ready(function () {
                 'photo_id': photo_id
             }),
             success: function (response) {
-                let like_counter_update = response + " Liked"
+                let like_counter_update = response
                 console.log('success', like_counter_update)
                 $(`[data-unlike-photo-id="${photo_id}"]`).addClass("d-none")
                 $(`[data-like-photo-id="${photo_id}"]`).removeClass("d-none")
                 $(`.like-counter${photo_id}`).text(like_counter_update)
 
-r;            },
+            },
             error: function (response) {
                 let error_obj = response.responseJSON['photo_id'][0]
                 console.log('error', error_obj)
                 window.alert(error_obj)
             }
         });
-    })
-})
+    });
+});

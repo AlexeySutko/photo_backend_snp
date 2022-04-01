@@ -1,34 +1,26 @@
 from django.utils import timezone
 
 class PhotoApprove:
+    FIELDS = ['future_name', "future_description", "future_image"]
 
-    @staticmethod
-    def photo_update_on_approval(instance):
-        photo = instance
-        if photo.__class__.__name__ == 'ModeratedPhoto':
-            if photo.future_name is not None:
-                photo.name = photo.future_name
-                photo.future_name = None
-            if photo.future_image is not None:
-                photo.image = photo.future_image
-                photo.future_image = None
-            if photo.future_description is not None:
-                photo.description = photo.future_description
-                photo.future_description = None
+    @classmethod
+    def update(cls, instance, parameter):
+        if parameter:
+            parameter_without_future = parameter.split('_')[1]
+            setattr(instance, parameter_without_future, getattr(instance, parameter))
+            setattr(instance, parameter, None)
 
-            photo.change_date = timezone.now()
-
-            photo.save()
+    @classmethod
+    def photo_approved(cls, instance):
+        if instance.__class__.__name__ == 'ModeratedPhoto':
+            [PhotoApprove.update(instance, parameter) for parameter in cls.FIELDS]
+            instance.save()
         else:
-            raise Exception(f'{photo.__class__.__name__} is not an instance of a Photo')
+            raise Exception(f'{instance.__class__.__name__} is not an instance of a Photo')
 
-    @staticmethod
-    def photo_not_approved(instance):
 
-        photo = instance
+    @classmethod
+    def photo_not_approved(cls, instance):
+        [setattr(instance, parameter, None) for parameter in cls.FIELDS]
 
-        photo.future_image = None
-        photo.future_name = None
-        photo.future_description = None
-
-        photo.save()
+        instance.save()
