@@ -7,8 +7,6 @@ from models_module.models.user.models import User
 from models_module.models.like.models import Like
 from models_module.models.photo.models import Photo
 
-from django.shortcuts import get_object_or_404
-
 
 class Create(Service):
     photo_id = forms.IntegerField(min_value=1)

@@ -15,8 +15,3 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='likes',
                              related_query_name='likes')
-
-    class Meta:
-        db_table = 'likes'
-        verbose_name = "like"
-        verbose_name_plural = "likes"

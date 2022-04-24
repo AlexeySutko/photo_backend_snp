@@ -1,5 +1,7 @@
 function asignControls() {
     ajaxPagination();
+    ajaxSearch();
+    ajaxSort();
 }
 
 $(document).ready(function () {
@@ -30,6 +32,7 @@ function ajaxPagination() {
             }, success: (response) => {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                asignControls();
 
                 $('.current .current-page').empty().text(newPage)
 
@@ -59,6 +62,7 @@ function ajaxPagination() {
             }, success: (response) => {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                asignControls();
 
                 $('.current .current-page').text(newPage)
 
@@ -92,6 +96,7 @@ function ajaxPagination() {
             }, success: (response) => {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                asignControls();
 
                 $('.current .current-page').text(newPage)
 
@@ -125,6 +130,7 @@ function ajaxPagination() {
             }, success: (response) => {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                asignControls();
 
                 $('.current .current-page').text(newPage)
 
@@ -143,6 +149,6 @@ function ajaxPagination() {
     })
 }
 
-$(document).ajaxStop(function () {
-    ajaxPagination()
-});
+// $(document).ajaxStop(function () {
+//     ajaxPagination()
+// });

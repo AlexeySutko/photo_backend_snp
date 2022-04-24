@@ -11,6 +11,6 @@
                     url="{% url 'web_site:photo_like' photo.id %}"><i class="fa-regular fa-heart"></i></span>
 
         {% endif %}
-        <div class="like-counter{{ photo.id }}">{{ photo.likes_count }}</div>
+        <div class="like-counter{{ photo.id }}" style="margin-left: 4px">{{ photo.likes_count }}</div>
     </div>
 {% endblock %}

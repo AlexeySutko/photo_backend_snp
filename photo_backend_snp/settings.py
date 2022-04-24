@@ -58,12 +58,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'decouple',
     'social_django',
     'rest_framework',
     'rest_framework.authtoken',
     'celery',
     'imagekit',
-    'decouple',
     'drf_yasg2',
     'channels',
     'django_fsm',
@@ -246,5 +246,5 @@ LOGGING = {
     }
 }
 
-MAIN_PAGE_COLLECTION_OBJECT_COUNT = config('MAIN_PAGE_COLLECTION_OBJECT_COUNT', cast=int, default=6)
-PERSONAL_CABINET_COLLECTION_OBJECT_COUNT = config('PERSONAL_CABINET_COLLECTION_OBJECT_COUNT', cast=int, default=3)
+MAIN_PAGE_COLLECTION_OBJECT_COUNT = config('MAIN_PAGE_COLLECTION_OBJECT_COUNT', cast=int, default=8)
+PERSONAL_CABINET_COLLECTION_OBJECT_COUNT = config('PERSONAL_CABINET_COLLECTION_OBJECT_COUNT', cast=int, default=4)

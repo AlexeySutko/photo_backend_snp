@@ -34,10 +34,6 @@ $(document).ready(function () {
         const url = $(this).attr('url');
         let photo_id = $(this).attr('value');
 
-        //The problem with setting type as DELETE by default is:
-        //     'photo_id': request.DELETE['photo_id']
-        // AttributeError: 'ASGIRequest' object has no attribute 'DELETE'
-
         $.ajax({
             type: 'DELETE',
             dataType: 'json',

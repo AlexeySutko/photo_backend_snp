@@ -2,7 +2,6 @@ import datetime
 
 from models_module.models.comment.models import Comment
 from models_module.models.user.models import User
-from models_module.managers.photo.manager import CustomPhotoManager
 from web_site.services.photo.photo_approve import PhotoApprove
 
 from django.db import models
@@ -54,9 +53,8 @@ class Photo(models.Model):
 
     state = FSMField(default='New', choices=STATES)
 
-    objects = CustomPhotoManager
-
     likes_count = models.IntegerField(default=0)
+    comment_count = models.IntegerField(default=0)
 
     comments = GenericRelation(Comment)
 

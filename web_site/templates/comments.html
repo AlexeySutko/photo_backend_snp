@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+        {% for comment in comment_list %}
+            {% include '_comment.html' with comment=comment %}
+        {% endfor %}
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/ajax_comments.js' %}"></script>
+{% endblock %}

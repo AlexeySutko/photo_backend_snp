@@ -4,8 +4,16 @@ $(document).ready(function () {
     ajaxSearch();
 });
 
+// function asignControls(){
+//     console.log('ds')
+//     ajaxSort();
+//     console.log('dsaasdw')
+//     ajaxSearch();
+//     console.log("dsd")
+// }
+
 function ajaxSort() {
-    $("[data-sort-by]").click(function (event) {
+    $("[data-sort-by]").on('click', function (event) {
         let paramStorage = localStorage;
         event.preventDefault();
         const param = $(this).attr('data-sort-by');
@@ -25,6 +33,8 @@ function ajaxSort() {
             success: function (response) {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                ajaxSort();
+                ajaxSearch();
             },
             error: function (response) {
                 console.log('failed')
@@ -34,13 +44,11 @@ function ajaxSort() {
 }
 
 function ajaxSearch() {
-    $("#search-bar").submit(function (event) {
+    $("#search-bar").on('submit', function (event) {
         let paramStorage = localStorage;
         event.preventDefault();
-        let
-            form = document.forms.search
-        formData = new FormData(form)
-        ;
+        let form = document.forms.search
+        formData = new FormData(form);
         const param = formData.get("search_string");
         paramStorage.setItem('search_string', param);
 
@@ -58,6 +66,8 @@ function ajaxSearch() {
             success: function (response) {
                 $('#photos .photos-collection').empty();
                 $('#photos .photos-collection').append($(response).html());
+                ajaxSearch();
+                ajaxSort();
             },
             error: function (response) {
                 const error_obj = response?.responseJSON['search_string'][0]
