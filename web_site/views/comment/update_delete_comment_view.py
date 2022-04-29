@@ -1,9 +1,10 @@
 import json
 import pdb
 
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, render
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -20,7 +21,11 @@ class UpdateDeleteCommentView(View):
             'user_id': request.user.pk,
             'comment_id': kwargs.get('comment_id')
         })
-        return HttpResponse(outcome.result)
+
+        if outcome.is_valid():
+            return JsonResponse("Comment deleted", status=200, safe=False)
+        else:
+            return JsonResponse(outcome.errors, status=400, safe=False)
 
     def put(self, request, *args, **kwargs):
         outcome = Change.execute({
@@ -28,4 +33,4 @@ class UpdateDeleteCommentView(View):
             'comment_id': kwargs.get('comment_id'),
             'comment_text': json.loads(request.body)['comment_text']
         })
-        return HttpResponse(outcome.result)
+        return render(request, template_name="_comment.html", context={"comment": outcome.result})

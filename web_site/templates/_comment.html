@@ -1,6 +1,6 @@
 {% load static %}
 {% block content %}
-    <div class="card" id="comment" data-comment-id="{{ comment.id }}">
+    <div class="card comment" data-comment-id="{{ comment.id }}">
         <div class="card-body">
             <div class="card-title"><img class="rounded" src="{{ comment.user.avatar.url }}" width="50"
                                          height="50"> {{ comment.user.get_full_name }}
@@ -8,32 +8,28 @@
             <div class="card-text">
                 {{ comment.text }}
             </div>
-            <div>
-                <i class="fa-solid fa-comment-dots"></i> {{ comment.comment_count }}
-            </div>
         </div>
         {% if user.is_authenticated %}
-            <div>
+            <div class="comment-control-buttons">
                 {% if request.user.pk == comment.user_id %}
                     <button class="btn btn-warning" data-delete-btn-comment-id="{{ comment.id }}">
                         <i class="fa-solid fa-comment-slash"></i>
                     </button>
-                    <button id="change-comment-btn" class="btn btn-warning"
+                    <button id="change-comment-btn" class="btn btn-warning change-comment-btn"
                             data-change-btn-comment-id="{{ comment.id }}"
                             data-method="PUT">
                         <i class="fa-solid fa-marker"></i>
                     </button>
                 {% endif %}
-                <button id="create-subcomment-btn" class="btn btn-warning" data-thread-btn-comment-id="{{ comment.id }}"
+                <button id="create-subcomment-btn" class="btn btn-warning create-subcomment-btn" data-thread-btn-comment-id="{{ comment.id }}"
                         data-method="POST">
                     <i class="fa-solid fa-comments"></i>
                 </button>
             </div>
-            <div id="form-container"></div>
         {% endif %}
         {% if comment.comments.all %}
-            <a class="" id="get-answers-btn">Show answers</a>
-            <div id="sub-comments" data-comment-id="{{ comment.id }}">
+            <a class="get-answers-btn">Show answers ( {{ comment.comment_count }} )</a>
+            <div class="sub-comments" data-comment-id="{{ comment.id }}">
                 {% for comment in comment.comments.all %}
 {#                    {% include '_comment.html' with comment=comment %}#}
                 {% endfor %}

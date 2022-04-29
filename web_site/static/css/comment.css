@@ -1,18 +1,18 @@
-#comment {
+.comment {
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: black;
 }
 
-#comment .card-body .card-title{
+.comment .card-body .card-title{
 }
 
-#comment .card-body .card-text{
+.comment .card-body .card-text{
     text-align: left;
     padding: 15px;
 }
 
-#comment .comment-buttons {
+.comment .comment-buttons {
     display: none;
 }

@@ -30,7 +30,7 @@
                 <i class="fa-solid fa-message"></i> {{ photo.comment_count }}
                 <div class="list-group list-group-flush">
                     {% if user.is_authenticated %}
-                        <form id="create-comment-form" data-photo-id="{{ photo.id }}" data-url=""
+                        <form id="create-comment-form" data-photo-id="{{ photo.id }}"
                               name="comment">
                             <label for="create-comment-text-area">Leave comment</label>
                             <textarea name="comment-text" class="form-control" id="create-comment-text-area"
@@ -39,8 +39,8 @@
                             <button type="submit" class="btn btn-warning">Submit</button>
                         </form>
                     {% endif %}
-                    <div id="comments">
-                        {% include 'comments.html' with comment_list=photo.comments.all %}
+                    <div class="comments">
+{#                        {% include 'comments.html' with comment_list=photo.comments.all %}#}
                     </div>
                 </div>
             </div>
@@ -52,4 +52,5 @@
 {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/ajax_likes.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_comments.js' %}"></script>
 {% endblock %}
