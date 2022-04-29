@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="container">
-        <div class="card mb-3" id="photo_details">
+        <div class="photo card mb-3" id="photo" data-photo-id="{{ photo.id }}">
             <img class="card-img-top" alt="image" src="{{ photo.image.url }}">
             <div class="card-body">
                 {% if request.user.id == photo.owner.id %}
@@ -21,20 +21,36 @@
                     {% endif %}
                 {% endif %}
                 <div class="card-title">
-                    <img class="rounded" src="{{ photo.owner.avatar.url }}" width="50" height="50">
+                    Author:
                     {{ photo.owner.get_full_name }}
                 </div>
-                <div>{{ photo.name }}</div>
-                <div class="card-body">{{ photo.description }}</div>
-                {% if user.is_authenticated %}
-                    {% include 'likes.html' %}
-                {% endif %}
-                <i class="fa-solid fa-message"></i>
-                <ul class="list-group list-group-flush">
-                    <!-- Place for comments -->
-                </ul>
+                <div>Title: {{ photo.name }}</div>
+                <div class="card-body">Description: {{ photo.description }}</div>
+                {% include 'likes.html' %}
+                <i class="fa-solid fa-message"></i> {{ photo.comment_count }}
+                <div class="list-group list-group-flush">
+                    {% if user.is_authenticated %}
+                        <form id="create-comment-form" data-photo-id="{{ photo.id }}"
+                              name="comment">
+                            <label for="create-comment-text-area">Leave comment</label>
+                            <textarea name="comment-text" class="form-control" id="create-comment-text-area"
+                                      type="comment"
+                                      rows="3"></textarea>
+                            <button type="submit" class="btn btn-warning">Submit</button>
+                        </form>
+                    {% endif %}
+                    <div class="comments">
+{#                        {% include 'comments.html' with comment_list=photo.comments.all %}#}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_likes.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_comments.js' %}"></script>
 {% endblock %}

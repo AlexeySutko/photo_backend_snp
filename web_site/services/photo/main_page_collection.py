@@ -1,3 +1,7 @@
+import pdb
+
+from django.db.models import Count
+
 from photo_backend_snp import settings
 
 from django.core.exceptions import ValidationError
@@ -21,7 +25,7 @@ class MainPageCollection(Service):
 
     @property
     def _collection(self):
-        page = Paginator(self._photos, settings.MAIN_PAGE_COLLECTION_OBJECT_COUNT)\
+        page = Paginator(self._photos, per_page=settings.MAIN_PAGE_COLLECTION_OBJECT_COUNT) \
             .page(self.cleaned_data.get('page') or 1)
         for photo in page.object_list:
             setattr(photo, "is_liked",
@@ -35,5 +39,8 @@ class MainPageCollection(Service):
             photos = photos.filter(name__icontains=self.cleaned_data.get('search_string'))
             photos = photos.filter(description__icontains=self.cleaned_data.get('search_string'))
         if self.cleaned_data.get('sorted_by'):
-            photos = photos.order_by(self.cleaned_data.get('sorted_by'))
-        return photos.prefetch_related('likes').select_related('owner')
+            if self.cleaned_data.get('sorted_by') == 'comments':
+                photos.annotate(comments_count=Count('comments__id')).order_by('-comments_count')
+            else:
+                photos = photos.order_by(self.cleaned_data.get('sorted_by'))
+        return photos.select_related('owner')

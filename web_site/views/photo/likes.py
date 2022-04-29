@@ -2,18 +2,11 @@ import json
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from django.http import JsonResponse
 
 from web_site.services.like.create import Create
 from web_site.services.like.remove import Remove
-from web_site.services.like.is_liked import IsLiked
-
-# from models_module.models.user.models import User
-# from models_module.models.photo.models import Photo
-
-
-from django.views import View
-from django.http import JsonResponse
-from django.shortcuts import render
 
 
 @method_decorator(csrf_exempt, name='dispatch')

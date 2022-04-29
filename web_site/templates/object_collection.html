@@ -28,17 +28,17 @@
                        data-sort-by="-likes_count">
                         {% translate "Likes (Desc)" %}</a>
                     <a class="dropdown-item" id="sort-btn"
-                       data-sort-by="comments">
+                       data-sort-by="comment_count">
                         {% translate "Comments (Asc)" %}</a>
                     <a class="dropdown-item" id="sort-btn"
-                       data-sort-by="-comments">
+                       data-sort-by="-comment_count">
                         {% translate "Comments (Desc)" %}</a>
                 </div>
             </li>
         </div>
         <div class="container">
             {% if object_list %}
-                <div class="row row-cols-1 row-cols-sm3 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm2 row-cols-md-4 g-2">
                     {% for photo in object_list %}
                         <div class="col">
                             <div class="card">
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                     {% include 'likes.html' %}
-                                    <i class="fa-solid fa-comment-dots"></i>
+                                    <i class="fa-solid fa-comment-dots"></i> {{ photo.comment_count }}
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <div id="sub-comments" data-comment-id="{{ comment.id }}">
+        <button class="" id="get-answers-btn">Show answers</button>
+        {% for comment in comment_list %}
+{#            {% include '_comment.html' with comment=comment %}#}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
