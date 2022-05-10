@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    // callCommentCollection
-    console.log(window.location.href.concat("comments"))
+    // callCommentCollectionk
     let paramStorage = localStorage;
     paramStorage.setItem('page', '1');
     $.ajax({
@@ -10,7 +9,7 @@ $(document).ready(function () {
             'page': paramStorage.getItem('page'),
         },
         success: function (response) {
-            $(".comments").append(response)
+            $(".comments").append(response);
             infiniteScroll();
             addSubmitListenerToCommentForm();
             callChangeOrAnswerCommentForm();
@@ -40,7 +39,6 @@ function infiniteScroll() {
 
                 success: function (response) {
                     $(".comments").append(response);
-                    debugger;
                     infiniteScroll();
                     addSubmitListenerToCommentForm();
                     callChangeOrAnswerCommentForm();
@@ -60,16 +58,14 @@ function callChangeOrAnswerCommentForm() {
         event.preventDefault();
         let commentId = $(this).parent().parent().attr("data-comment-id"); // $(this).parents("[data-comment-id]").attr("data-comment-id");
         let comment = $(this).parent().parent();
-        console.log(comment)
+
         $(".comment-multiform").remove();
 
         comment.children('.comment-control-buttons').append("<form class=\"comment-multiform\" data-form-comment-id=\"{{ comment.id }}\" name=\"comment\"><label for=\"comment-multiform-text-area\">Change your comment</label><textarea name=\"comment-text\" class=\"form-control\" id=\"comment-multiform-text-area\" type=\"comment\" rows=\"3\"></textarea><button type=\"submit\" class=\"btn btn-warning\">Submit</button></form>");
-        debugger;
-        let commentForm = $(".comment-multiform")
+        let commentForm = $(".comment-multiform");
         commentForm.on("submit", function (event) {
-            event.preventDefault()
-            let commentText = commentForm.children("#comment-multiform-text-area").val()
-            console.log(commentText)
+            event.preventDefault();
+            let commentText = commentForm.children("#comment-multiform-text-area").val();
             $.ajax({
                 type: 'PUT',
                 url: `/comments/${commentId}`,
@@ -78,7 +74,7 @@ function callChangeOrAnswerCommentForm() {
                 }),
                 success: function (response) {
                     $(".comment-multiform").remove();
-                    comment.replaceWith(response)
+                    comment.replaceWith(response);
                     addSubmitListenerToCommentForm();
                     callChangeOrAnswerCommentForm();
                     addClickListenerOnAnswersBtnAndDeleteBtn();
@@ -98,13 +94,11 @@ function callChangeOrAnswerCommentForm() {
         $(".comment-multiform").remove();
 
         comment.children('.comment-control-buttons').append("<form class=\"comment-multiform\" name=\"comment\"><label for=\"comment-multiform-text-area\">Enter your answer</label><textarea name=\"comment-text\" class=\"form-control\" id=\"comment-multiform-text-area\" type=\"comment\" rows=\"3\"></textarea><button type=\"submit\" class=\"btn btn-warning\">Submit</button></form>");
-        debugger;
-        let commentForm = $(".comment-multiform")
+        let commentForm = $(".comment-multiform");
 
         commentForm.on("submit", function (event) {
-            event.preventDefault()
-            let commentText = commentForm.children("#comment-multiform-text-area").val()
-            console.log(commentText)
+            event.preventDefault();
+            let commentText = commentForm.children("#comment-multiform-text-area").val();
 
             $.ajax({
                 type: 'POST',
@@ -116,9 +110,7 @@ function callChangeOrAnswerCommentForm() {
                 },
                 success: function (response) {
                     $(".comment-multiform").remove();
-                    comment.append("<div class=\"sub-comments\" >" + response + "</div>")
-                    comment.children(".answer-counter").text().replaceWith(comment.children(".answer-counter").val() + 1)
-                    debugger;
+                    comment.append("<div class=\"sub-comments\" >" + response + "</div>");
                     addSubmitListenerToCommentForm();
                     callChangeOrAnswerCommentForm();
                     addClickListenerOnAnswersBtnAndDeleteBtn();
@@ -134,10 +126,8 @@ function addSubmitListenerToCommentForm() {
     let parent = $("#photo").attr("id");
     commentForm.off('submit');
     commentForm.on('submit', function (event) {
-        event.preventDefault().stopPropagation();
-        let commentText = commentForm.children("#create-comment-text-area").val()
-        console.log(commentText)
-        console.log('button was pressed')
+        event.preventDefault();
+        let commentText = commentForm.children("#create-comment-text-area").val();
 
         $.ajax({
             type: 'POST',
@@ -148,7 +138,7 @@ function addSubmitListenerToCommentForm() {
                 'comment_text': commentText
             },
             success: function (response) {
-                commentForm.children("#create-comment-text-area").val().empty()
+                commentForm.children("#create-comment-text-area").val().empty();
                 $(".comments").append(response);
                 addSubmitListenerToCommentForm();
                 callChangeOrAnswerCommentForm();
@@ -166,10 +156,7 @@ function addClickListenerOnAnswersBtnAndDeleteBtn() {
         event.preventDefault();
         let comment = $(this).parent();
         let parentId = $(this).parent().attr('data-comment-id');
-        $(this).addClass("d-none")
-        debugger;
-
-        console.log(parentId)
+        $(this).addClass("d-none");
 
         $.ajax({
             type: 'GET',
@@ -184,7 +171,7 @@ function addClickListenerOnAnswersBtnAndDeleteBtn() {
         })
     });
 
-    $("[data-delete-btn-comment-id]").off('click')
+    $("[data-delete-btn-comment-id]").off('click');
     $("[data-delete-btn-comment-id]").on('click', function (event) {
         event.preventDefault();
         let comment = $(this).parent().parent();
@@ -194,13 +181,11 @@ function addClickListenerOnAnswersBtnAndDeleteBtn() {
             type: 'DELETE',
             url: `/comments/${commentId}`,
             success: function (response) {
-                console.log("Worked")
-                comment.remove()
+                comment.remove();
             },
             error: function (response) {
-                console.log(response)
-                let message = response.responseJSON['comment_id'][0]
-                comment.append(message)
+                let message = response.responseJSON['comment_id'][0];
+                comment.append(message);
             }
         })
     });

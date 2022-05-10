@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+
+import redis
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -65,6 +67,7 @@ INSTALLED_APPS = [
     'celery',
     'imagekit',
     'drf_yasg2',
+    'channels_redis',
     'channels',
     'django_fsm',
     'fsm_admin2',
@@ -72,6 +75,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'models_module',
     'web_site',
+    'API',
     'fontawesomefree',
     # 'django_cleanup.apps.CleanupConfig',
 ]
@@ -213,6 +217,8 @@ CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 CELERY_TIMEZONE = 'Europe/Moscow'
 
+REDIS_INSTANCE = redis.StrictRedis(host="127.0.0.1", port=6379, db=0)
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication'
@@ -244,6 +250,15 @@ LOGGING = {
             'propagate': False,
         },
     }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }
 
 MAIN_PAGE_COLLECTION_OBJECT_COUNT = config('MAIN_PAGE_COLLECTION_OBJECT_COUNT', cast=int, default=8)

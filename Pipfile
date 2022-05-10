@@ -36,6 +36,7 @@ django-cleanup = "*"
 django-celery-beat = "*"
 uvicorn = "*"
 fontawesomefree = "*"
+channels-redis = "*"
 
 [dev-packages]
 

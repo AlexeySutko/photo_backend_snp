@@ -5,7 +5,7 @@ function asignControls() {
 }
 
 $(document).ready(function () {
-    ajaxPagination()
+    ajaxPagination();
 });
 
 
@@ -21,7 +21,6 @@ function ajaxPagination() {
         event.preventDefault();
         let newPage = firstPageBtn.attr('value');
         paramStorage.setItem('page', newPage);
-        console.log(paramStorage.getItem('page'));
 
         $.ajax({
             type: 'GET',
@@ -34,15 +33,15 @@ function ajaxPagination() {
                 $('#photos .photos-collection').append($(response).html());
                 asignControls();
 
-                $('.current .current-page').empty().text(newPage)
+                $('.current .current-page').empty().text(newPage);
 
-                prevPageBtn.attr('value', null)
-                nextPageBtn.attr('value', String(Number(newPage) + 1))
+                prevPageBtn.attr('value', null);
+                nextPageBtn.attr('value', String(Number(newPage) + 1));
 
-                lastPageBtn.removeClass("d-none")
-                nextPageBtn.removeClass("d-none")
-                firstPageBtn.addClass("d-none")
-                prevPageBtn.addClass("d-none")
+                lastPageBtn.removeClass("d-none");
+                nextPageBtn.removeClass("d-none");
+                firstPageBtn.addClass("d-none");
+                prevPageBtn.addClass("d-none");
 
             },
         })
@@ -51,7 +50,6 @@ function ajaxPagination() {
         event.preventDefault();
         let newPage = prevPageBtn.attr('value');
         paramStorage.setItem('page', newPage);
-        console.log(paramStorage.getItem('page'));
 
         $.ajax({
             type: 'GET',
@@ -64,23 +62,23 @@ function ajaxPagination() {
                 $('#photos .photos-collection').append($(response).html());
                 asignControls();
 
-                $('.current .current-page').text(newPage)
+                $('.current .current-page').text(newPage);
 
-                prevPageBtn.attr('value', String(Number(newPage) - 1))
-                nextPageBtn.attr('value', String(Number(newPage) + 1))
+                prevPageBtn.attr('value', String(Number(newPage) - 1));
+                nextPageBtn.attr('value', String(Number(newPage) + 1));
 
-                lastPageBtn.removeClass("d-none")
-                nextPageBtn.removeClass("d-none")
+                lastPageBtn.removeClass("d-none");
+                nextPageBtn.removeClass("d-none");
 
                 if (Number(paramStorage.getItem('page')) === Number(firstPageBtn.attr('value'))) {
-                    prevPageBtn.attr('value', null)
-                    nextPageBtn.attr('value', String(Number(newPage) + 1))
-                    firstPageBtn.addClass("d-none")
-                    prevPageBtn.addClass("d-none")
+                    prevPageBtn.attr('value', null);
+                    nextPageBtn.attr('value', String(Number(newPage) + 1));
+                    firstPageBtn.addClass("d-none");
+                    prevPageBtn.addClass("d-none");
                 }
             },
-        })
-    })
+        });
+    });
     nextPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = nextPageBtn.attr('value');
@@ -98,23 +96,23 @@ function ajaxPagination() {
                 $('#photos .photos-collection').append($(response).html());
                 asignControls();
 
-                $('.current .current-page').text(newPage)
+                $('.current .current-page').text(newPage);
 
-                prevPageBtn.attr('value', String(Number(newPage) - 1))
-                nextPageBtn.attr('value', String(Number(newPage) + 1))
+                prevPageBtn.attr('value', String(Number(newPage) - 1));
+                nextPageBtn.attr('value', String(Number(newPage) + 1));
 
-                firstPageBtn.removeClass("d-none")
-                prevPageBtn.removeClass("d-none")
+                firstPageBtn.removeClass("d-none");
+                prevPageBtn.removeClass("d-none");
 
                 if (Number(paramStorage.getItem('page')) === Number(lastPageBtn.attr('value'))) {
-                    lastPageBtn.attr('value', null)
-                    prevPageBtn.attr('value', String(Number(newPage) - 1))
-                    lastPageBtn.addClass("d-none")
-                    nextPageBtn.addClass("d-none")
+                    lastPageBtn.attr('value', null);
+                    prevPageBtn.attr('value', String(Number(newPage) - 1));
+                    lastPageBtn.addClass("d-none");
+                    nextPageBtn.addClass("d-none");
                 }
             },
-        })
-    })
+        });
+    });
     lastPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = lastPageBtn.attr('value');
@@ -132,21 +130,21 @@ function ajaxPagination() {
                 $('#photos .photos-collection').append($(response).html());
                 asignControls();
 
-                $('.current .current-page').text(newPage)
+                $('.current .current-page').text(newPage);
 
-                nextPageBtn.attr('value', null)
-                prevPageBtn.attr('value', String(Number(newPage) - 1))
+                nextPageBtn.attr('value', null);
+                prevPageBtn.attr('value', String(Number(newPage) - 1));
 
-                firstPageBtn.removeClass("d-none")
-                prevPageBtn.removeClass("d-none")
-                nextPageBtn.addClass("d-none")
-                lastPageBtn.addClass("d-none")
+                firstPageBtn.removeClass("d-none");
+                prevPageBtn.removeClass("d-none");
+                nextPageBtn.addClass("d-none");
+                lastPageBtn.addClass("d-none");
 
-                firstPageBtn.removeClass("d-none")
-                prevPageBtn.removeClass("d-none")
+                firstPageBtn.removeClass("d-none");
+                prevPageBtn.removeClass("d-none");
             },
-        })
-    })
+        });
+    });
 }
 
 // $(document).ajaxStop(function () {

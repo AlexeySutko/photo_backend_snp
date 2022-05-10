@@ -1,31 +1,16 @@
-# def _something(photo):
-#     counter = photo.comments.count()
-#     def _func(object, counter):
-#         pdb.set_trace()
-#         if object.comments.all():
-#             counter += object.comments.count()
-#             pdb.set_trace()
-#             for comment in object.comments.all():
-#                 counter += comment.comments.count()
-#                 pdb.set_trace()
-#                 _func(comment, counter)
-#                 pdb.set_trace()
-#                 return counter
-#         else:
-#             return counter
-#     for comment in photo.comments.all():
-#         counter = _func(comment, counter)
-#         pdb.set_trace()
-#     return counter
+import json
 import pdb
 
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models import F
 from service_objects.services import Service, forms
 
-from models_module.models import Photo
+from models_module.models import Photo, User
 from models_module.models.comment.models import Comment
+from photo_backend_snp.settings import REDIS_INSTANCE
 
 
 class Create(Service):
@@ -93,3 +78,15 @@ class Create(Service):
         photo = Photo.objects.get(id=self.cleaned_data['photo_id'])
         photo.comment_count = F('comment_count') + 1
         photo.save(update_fields=["comment_count"])
+
+    def _send_notification(self, photo):
+        channel_layer = get_channel_layer()
+        user = User.objects.get(id=self.cleaned_data.get('user_id'))
+        async_to_sync(channel_layer.send)(REDIS_INSTANCE.get(f"private_for_{photo.owner_id}").decode("utf-8"), {
+            "type": "photo_approval_notification",
+            "payload": json.dumps({
+                'type': "comment",
+                'photo_name': photo.name,
+                'comment_owner': user.get_full_name(),
+            }),
+        })

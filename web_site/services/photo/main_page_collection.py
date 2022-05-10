@@ -39,8 +39,5 @@ class MainPageCollection(Service):
             photos = photos.filter(name__icontains=self.cleaned_data.get('search_string'))
             photos = photos.filter(description__icontains=self.cleaned_data.get('search_string'))
         if self.cleaned_data.get('sorted_by'):
-            if self.cleaned_data.get('sorted_by') == 'comments':
-                photos.annotate(comments_count=Count('comments__id')).order_by('-comments_count')
-            else:
-                photos = photos.order_by(self.cleaned_data.get('sorted_by'))
+            photos = photos.order_by(self.cleaned_data.get('sorted_by'))
         return photos.select_related('owner')

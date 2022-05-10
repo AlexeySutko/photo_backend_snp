@@ -1,5 +1,6 @@
 import datetime
 
+from models_module.managers.photo.manager import PhotoManager
 from models_module.models.comment.models import Comment
 from models_module.models.user.models import User
 from web_site.services.photo.photo_approve import PhotoApprove
@@ -57,6 +58,8 @@ class Photo(models.Model):
     comment_count = models.IntegerField(default=0)
 
     comments = GenericRelation(Comment)
+
+    objects = PhotoManager()
 
     class Meta:
         db_table = 'photos'
