@@ -17,6 +17,7 @@ function ajaxPagination() {
     let lastPageBtn = $('#pagination .last-page-btn');
     let currentPage = paramStorage.getItem('page');
 
+    firstPageBtn.off()
     firstPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = firstPageBtn.attr('value');
@@ -46,6 +47,7 @@ function ajaxPagination() {
             },
         })
     })
+    prevPageBtn.off()
     prevPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = prevPageBtn.attr('value');
@@ -79,6 +81,7 @@ function ajaxPagination() {
             },
         });
     });
+    nextPageBtn.off()
     nextPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = nextPageBtn.attr('value');
@@ -113,6 +116,7 @@ function ajaxPagination() {
             },
         });
     });
+    lastPageBtn.off()
     lastPageBtn.on('click', (event) => {
         event.preventDefault();
         let newPage = lastPageBtn.attr('value');

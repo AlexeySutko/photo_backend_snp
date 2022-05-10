@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('', include('web_site.urls')),
+    path('api/', include('API.urls')),
 ]
 
 urlpatterns += yasg_urls
